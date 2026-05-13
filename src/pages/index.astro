@@ -3,6 +3,7 @@ const contactEmail = "vialgouteyron@gmail.com";
 const location = "Valence, Drome, Ardeche et France a distance";
 const githubUrl = "https://github.com/QuentinVG";
 const linkedinUrl = "https://www.linkedin.com/in/qvg/";
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 const audiences = [
   "Artisans",
@@ -99,7 +100,7 @@ const process = [
 const demos = [
   {
     title: "Artisan local",
-    image: "/projects/artisan-web.png",
+    image: asset("projects/artisan-web.png"),
     alt: "Exemple de site pour artisan local",
     problem: "L'activite repose sur le bouche-a-oreille, mais le site ne montre pas clairement les services ni la zone d'intervention.",
     solution: "Une page de services lisible, des exemples de realisations, des avis et un bouton de demande de devis visible.",
@@ -107,7 +108,7 @@ const demos = [
   },
   {
     title: "Coach ou independant",
-    image: "/projects/coach-web.png",
+    image: asset("projects/coach-web.png"),
     alt: "Exemple de site pour coach ou independant",
     problem: "L'offre est serieuse, mais difficile a expliquer simplement a une personne qui decouvre l'activite.",
     solution: "Une page qui clarifie l'accompagnement, rassure avec un parcours simple et met en avant la prise de rendez-vous.",
@@ -115,7 +116,7 @@ const demos = [
   },
   {
     title: "Association ou commerce",
-    image: "/projects/restaurant-web.png",
+    image: asset("projects/restaurant-web.png"),
     alt: "Exemple de site pour association ou petit commerce",
     problem: "Les informations utiles sont dispersees: horaires, lieu, actualites, contact ou inscription.",
     solution: "Une structure courte avec les informations essentielles, une page contact et des appels a l'action simples.",
@@ -179,8 +180,8 @@ const faqs = [
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
+    <link rel="icon" href={asset("favicon.ico")} />
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
