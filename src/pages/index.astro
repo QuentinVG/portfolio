@@ -1,179 +1,229 @@
 ---
 const contactEmail = "vialgouteyron@gmail.com";
-const location = "Valence, Drome, Ardeche et France a distance";
+const location = "Valence, Drôme, Ardèche et France à distance";
 const githubUrl = "https://github.com/QuentinVG";
 const linkedinUrl = "https://www.linkedin.com/in/qvg/";
 const asset = (path: string) =>
   `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
 
+const mailSubject = "Demande de première estimation pour un site web";
+const mailBody = `Bonjour Quentin,
+
+Je souhaite vous contacter pour un projet de site web.
+
+Mon activité :
+Ma ville / zone :
+Mon objectif principal :
+Ai-je déjà un site ? :
+Délai souhaité :
+Budget approximatif :
+Contenus déjà disponibles : textes / photos / logo / nom de domaine
+
+Merci,`;
+const mailHref = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
 const audiences = [
-  "Artisans",
-  "Independants",
-  "Commerces locaux",
-  "Associations",
-  "Petites entreprises",
-  "Coachs et prestataires",
+  "Praticiens bien-être",
+  "Coachs",
+  "Indépendants",
+  "Associations locales",
+  "Artisans soigneux",
+  "Petites structures",
 ];
 
-const problems = [
-  "Vous n'avez pas encore de site et vous voulez une presence claire.",
-  "Votre site existe, mais il fait vieillir votre image.",
-  "Sur mobile, vos clients ne trouvent pas vite les informations utiles.",
-  "Votre site ne rassure pas assez avant une prise de contact.",
-  "Vous avez peur de payer une agence trop chere pour un besoin simple.",
-  "Vous ne voulez pas vous perdre dans la technique.",
+const goodFit = [
+  "Vous voulez une présence en ligne claire sans vous prendre la tête.",
+  "Vous avez besoin d'un site simple pour rassurer vos futurs clients.",
+  "Vous voulez pouvoir envoyer un lien propre à quelqu'un.",
+  "Vous voulez être accompagné sans jargon technique.",
+  "Vous préférez une approche humaine, directe et bien cadrée.",
+];
+
+const badFit = [
+  "Vous cherchez un gros site e-commerce ou une application complexe.",
+  "Vous voulez une disponibilité immédiate tous les jours.",
+  "Vous attendez une stratégie marketing complète.",
+  "Vous n'avez pas encore clarifié votre activité, vos offres ou vos contenus.",
+  "Vous cherchez uniquement le prix le plus bas possible.",
 ];
 
 const deliverables = [
   {
     title: "Sites vitrines",
-    text: "Une presence complete pour presenter votre activite, vos services et faciliter les demandes.",
+    text: "Une présence complète pour présenter votre activité, vos services et faciliter la prise de contact.",
   },
   {
-    title: "Landing pages",
-    text: "Une page ciblee pour lancer une offre, un evenement ou tester une idee rapidement.",
+    title: "Pages simples",
+    text: "Une page claire pour présenter une offre, un événement ou démarrer avec une présence en ligne propre.",
   },
   {
-    title: "Refontes simples",
-    text: "Un site plus clair, plus moderne et plus lisible sans repartir dans un chantier inutile.",
+    title: "Refontes légères",
+    text: "Un site plus lisible, plus moderne et plus rassurant sans transformer le projet en chantier lourd.",
   },
   {
     title: "Suivi mensuel",
-    text: "Des petites modifications, corrections et conseils pour garder un site propre dans le temps.",
-  },
-  {
-    title: "Mini outils web",
-    text: "Un calculateur, formulaire avance, generateur de devis ou tableau de suivi quand un site ne suffit pas.",
+    text: "Un accompagnement léger pour garder votre site propre, à jour et vivant dans le temps.",
   },
 ];
 
 const offers = [
   {
-    name: "Page Express",
-    price: "a partir de 390 EUR",
-    bestFor: "Pour presenter une activite, une offre, un evenement ou lancer une presence en ligne simple.",
+    name: "Page Simple",
+    price: "à partir de 390 €",
+    delay: "Délai indicatif : 1 à 2 semaines",
+    bestFor: "Pour présenter une activité, une offre, un événement ou commencer avec une présence en ligne claire.",
     items: [
       "Une page responsive",
-      "Presentation claire de l'activite",
+      "Présentation claire de l'activité",
+      "Structure adaptée au mobile",
       "Bouton ou formulaire de contact",
-      "Optimisation mobile",
-      "Mise en ligne possible",
+      "Optimisation de base",
+      "Accompagnement à la mise en ligne si besoin",
     ],
   },
   {
     name: "Site Vitrine",
-    price: "a partir de 790 EUR",
+    price: "à partir de 890 €",
+    delay: "Délai indicatif : 3 à 4 semaines",
     highlighted: true,
-    bestFor: "Pour une presence plus complete, credible et facile a partager a vos futurs clients.",
+    bestFor: "Pour une présence plus complète, plus rassurante et plus facile à partager.",
     items: [
-      "3 a 5 pages",
-      "Accueil, services, a propos, contact, mentions legales",
+      "3 à 5 pages",
+      "Accueil, services, à propos, contact, mentions légales",
       "Design responsive",
-      "Structure claire et SEO de base raisonnable",
+      "Structure claire",
+      "Performance correcte",
+      "SEO de base raisonnable",
       "Formulaire de contact",
-      "Accompagnement mise en ligne",
+      "Accompagnement à la mise en ligne",
     ],
   },
   {
     name: "Suivi Mensuel",
-    price: "a partir de 79 EUR / mois",
-    bestFor: "Pour garder un site propre, vivant et a jour sans devoir tout gerer seul.",
+    price: "à partir de 79 € / mois",
+    delay: "Accompagnement léger, sans urgence 24/7",
+    bestFor: "Pour garder un site propre, à jour et vivant, avec des délais raisonnables.",
     items: [
       "Petites modifications",
       "Corrections mineures",
-      "Mises a jour de contenu",
-      "Verifications regulieres",
+      "Mises à jour de contenu",
       "Conseils simples",
-      "Support leger",
+      "Vérifications régulières",
+      "Support léger",
     ],
   },
 ];
 
+const pricingFactors = [
+  "Nombre de pages",
+  "Quantité de contenus à créer",
+  "Photos ou visuels à préparer",
+  "Besoin WordPress ou non",
+  "Formulaire avancé",
+  "Fonctionnalités spécifiques",
+  "Accompagnement après mise en ligne",
+  "Urgence du délai",
+];
+
 const process = [
-  ["01", "Echange rapide", "Vous m'expliquez votre activite, votre objectif et ce que le site doit permettre."],
-  ["02", "Proposition claire", "Je vous indique une solution, un budget, un delai et les contenus necessaires."],
-  ["03", "Creation", "Je construis une premiere version propre, lisible sur mobile et adaptee a votre besoin."],
-  ["04", "Retours", "On ajuste les textes, les priorites et les details importants avant la livraison."],
-  ["05", "Mise en ligne", "Je vous accompagne pour le domaine, l'hebergement et les derniers reglages."],
-  ["06", "Suivi si besoin", "Vous pouvez ensuite demander des corrections, ajouts ou conseils ponctuels."],
+  ["01", "Échange simple", "Vous m'expliquez votre activité, votre objectif et ce que le site doit permettre."],
+  ["02", "Cadrage", "Je vous dis franchement ce qui est utile, ce qui ne l'est pas, le budget et le délai réalistes."],
+  ["03", "Création", "Je construis une version propre, lisible sur mobile et adaptée à votre niveau d'autonomie."],
+  ["04", "Retours", "On ajuste les textes, les priorités et les détails importants sans multiplier les réunions."],
+  ["05", "Mise en ligne", "Je vous accompagne pour le domaine, l'hébergement et les derniers réglages si besoin."],
+  ["06", "Suivi léger", "Vous pouvez ensuite demander des petites corrections ou mises à jour, sans support permanent."],
 ];
 
 const demos = [
   {
+    title: "Praticien bien-être",
+    image: asset("projects/coach-web.png"),
+    alt: "Exemple de site pour praticien bien-être",
+    context: "Un praticien installé autour de Valence veut un site simple pour expliquer sa pratique et rassurer avant une première prise de contact.",
+    problem: "Son activité est claire à l'oral, mais difficile à comprendre rapidement en ligne.",
+    solution: "Une page d'accueil apaisante, une présentation courte, des informations pratiques et un bouton de contact visible.",
+    result: "Le visiteur comprend à qui s'adresse l'accompagnement et peut contacter le praticien sans hésiter.",
+  },
+  {
     title: "Artisan local",
     image: asset("projects/artisan-web.png"),
     alt: "Exemple de site pour artisan local",
-    problem: "L'activite repose sur le bouche-a-oreille, mais le site ne montre pas clairement les services ni la zone d'intervention.",
-    solution: "Une page de services lisible, des exemples de realisations, des avis et un bouton de demande de devis visible.",
-    result: "Le visiteur comprend vite si l'artisan peut l'aider et sait comment le contacter.",
+    context: "Un artisan soigneux en Drôme / Ardèche veut montrer son sérieux sans investir dans un site trop lourd.",
+    problem: "Les clients potentiels ne voient pas clairement les prestations, la zone d'intervention ou la manière de demander un devis.",
+    solution: "Une structure lisible avec services, zone couverte, exemples de réalisations et formulaire de demande.",
+    result: "Le site devient un support de confiance à envoyer après un premier échange ou une recommandation.",
   },
   {
-    title: "Coach ou independant",
-    image: asset("projects/coach-web.png"),
-    alt: "Exemple de site pour coach ou independant",
-    problem: "L'offre est serieuse, mais difficile a expliquer simplement a une personne qui decouvre l'activite.",
-    solution: "Une page qui clarifie l'accompagnement, rassure avec un parcours simple et met en avant la prise de rendez-vous.",
-    result: "Une presence plus credible et un chemin plus direct vers le premier contact.",
-  },
-  {
-    title: "Association ou commerce",
+    title: "Association ou indépendant",
     image: asset("projects/restaurant-web.png"),
-    alt: "Exemple de site pour association ou petit commerce",
-    problem: "Les informations utiles sont dispersees: horaires, lieu, actualites, contact ou inscription.",
-    solution: "Une structure courte avec les informations essentielles, une page contact et des appels a l'action simples.",
-    result: "Moins de questions repetitives et une image plus professionnelle en ligne.",
+    alt: "Exemple de site pour association ou indépendant",
+    context: "Une petite structure locale veut centraliser ses informations et éviter de répéter les mêmes réponses.",
+    problem: "Horaires, lieu, activités, inscription et contact sont dispersés sur plusieurs supports.",
+    solution: "Un site court, bien rangé, avec les informations essentielles et un contact facile.",
+    result: "Les visiteurs trouvent plus vite les bonnes informations, et la structure paraît plus fiable.",
   },
 ];
 
 const trustItems = [
-  "Environ 9 ans d'experience professionnelle en developpement web.",
-  "Lead developer PHP: assez technique pour faire propre, assez pragmatique pour rester simple.",
-  "Un interlocuteur unique, sans jargon inutile.",
-  "Des tarifs annonces clairement avant de commencer.",
-  "Des sites rapides, maintenables et adaptes au niveau d'autonomie souhaite.",
-  "Des outils modernes pour travailler efficacement, avec une livraison relue et adaptee.",
+  "Environ 9 ans d'expérience professionnelle en développement web.",
+  "Un profil de lead developer PHP, avec une approche volontairement simple côté client.",
+  "Un interlocuteur unique pour comprendre, construire et livrer le site.",
+  "Des prix lisibles et un cadrage clair avant de commencer.",
+  "Pas de jargon technique inutile, pas de promesse SEO miracle.",
+  "Des sites simples, rapides, maintenables et adaptés à votre besoin réel.",
+  "J'utilise des outils modernes pour travailler efficacement, mais chaque projet est relu, adapté et livré proprement.",
+];
+
+const contactChecklist = [
+  "Votre activité",
+  "Votre ville ou zone",
+  "Votre objectif principal",
+  "Si vous avez déjà un site",
+  "Le délai souhaité",
+  "Votre budget approximatif",
+  "Ce que vous avez déjà : textes, photos, logo, nom de domaine",
 ];
 
 const faqs = [
   {
     question: "Combien de temps prend un site ?",
     answer:
-      "Une page simple peut souvent etre prete en quelques jours si les contenus sont disponibles. Un site vitrine prend plutot une a trois semaines selon le nombre de pages, les retours et la mise en ligne.",
+      "Une page simple prend généralement 1 à 2 semaines selon ma disponibilité et les contenus fournis. Un site vitrine prend plutôt 3 à 4 semaines selon le nombre de pages, les retours et la mise en ligne.",
   },
   {
-    question: "Est-ce que je peux modifier mon site moi-meme ?",
+    question: "Est-ce que je peux modifier mon site moi-même ?",
     answer:
-      "Oui, si c'est important pour vous, je peux choisir une solution comme WordPress. Si vous preferez un site tres rapide et simple, je peux aussi gerer les modifications ponctuelles pour vous.",
+      "Oui, si c'est important pour vous. Je peux choisir une solution comme WordPress. Si vous préférez un site très rapide et simple, je peux aussi gérer les petites modifications avec un suivi léger.",
   },
   {
-    question: "Est-ce que l'hebergement est inclus ?",
+    question: "Est-ce que l'hébergement est inclus ?",
     answer:
-      "Non, l'hebergement et le nom de domaine restent a votre nom. Je peux vous conseiller une solution simple et vous accompagner pour la mise en ligne.",
+      "Non, l'hébergement et le nom de domaine restent à votre nom. Je peux vous conseiller une solution simple et vous accompagner pour la mise en ligne.",
   },
   {
     question: "Est-ce qu'il y a un engagement mensuel ?",
     answer:
-      "Non. Le suivi mensuel est optionnel. Vous pouvez aussi demander des modifications ponctuelles quand vous en avez besoin.",
+      "Non. Le suivi mensuel est optionnel. Il sert à garder le site propre et vivant, mais ne correspond pas à une disponibilité immédiate 24/7.",
   },
   {
     question: "Est-ce que vous faites le logo ?",
     answer:
-      "Je peux faire une base tres simple si necessaire, mais je ne me presente pas comme graphiste ou studio de marque. Pour une identite complete, il vaut mieux travailler avec un specialiste.",
+      "Je peux prévoir une base très simple si nécessaire, mais je ne remplace pas un graphiste ou un spécialiste de l'identité visuelle.",
   },
   {
-    question: "Est-ce que vous travaillez a distance ?",
+    question: "Est-ce que vous travaillez à distance ?",
     answer:
-      "Oui. Je travaille a Valence, dans la Drome et l'Ardeche, mais je peux gerer un projet complet a distance partout en France.",
+      "Oui. Je suis basé à Valence et je peux travailler avec des structures en Drôme, Ardèche, Bourg-lès-Valence, Romans-sur-Isère, Guilherand-Granges, Tournon-sur-Rhône, Crest, ou à distance en France.",
   },
   {
-    question: "Est-ce que je dois deja avoir les textes et les photos ?",
+    question: "Est-ce que je dois déjà avoir les textes et les photos ?",
     answer:
-      "Pas forcement. C'est mieux si vous avez deja une base, mais je peux vous aider a structurer les textes et vous dire quelles photos seront utiles.",
+      "Pas forcément, mais il faut au moins une base. Je peux vous aider à structurer les textes, mais je ne propose pas une rédaction complète si rien n'est fourni.",
   },
   {
-    question: "Est-ce que le referencement Google est inclus ?",
+    question: "Est-ce que le référencement Google est inclus ?",
     answer:
-      "Un SEO de base propre est inclus: structure des pages, titres, performance, mobile et metadonnees simples. Je ne promets pas une premiere place Google.",
+      "Un SEO de base propre est inclus : structure des pages, titres, performance, mobile et métadonnées simples. Je ne promets pas une première place Google.",
   },
 ];
 ---
@@ -186,21 +236,21 @@ const faqs = [
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Quentin Vial-Gouteyron cree des sites vitrines, landing pages et maintenances legeres pour artisans, independants, petites entreprises, associations et commerces locaux."
+      content="Quentin Vial-Gouteyron, développeur web à Valence, crée des sites simples, propres et rassurants pour praticiens, indépendants, associations et petites structures en Drôme, Ardèche et à distance."
     />
     <meta name="generator" content={Astro.generator} />
-    <title>Quentin Vial-Gouteyron - Sites web simples et professionnels</title>
+    <title>Quentin Vial-Gouteyron - Sites web simples à Valence</title>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Retour accueil">
-        <span>Quentin</span>
-        <small>Web freelance</small>
+        <span>Quentin Vial-Gouteyron</span>
+        <small>Développeur web à Valence</small>
       </a>
       <nav aria-label="Navigation principale">
+        <a href="#pour-qui">Pour qui</a>
         <a href="#offres">Offres</a>
-        <a href="#exemples">Exemples</a>
-        <a href="#faq">FAQ</a>
+        <a href="#profil">Profil</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -209,72 +259,89 @@ const faqs = [
       <section class="hero section-pad">
         <div class="hero-copy">
           <p class="eyebrow">{location}</p>
-          <h1>Des sites web simples, rapides et professionnels pour les petites entreprises.</h1>
+          <h1>Un site simple, propre et rassurant pour présenter votre activité.</h1>
           <p class="lead">
-            Developpeur web a Valence, j'aide les artisans, independants et petites structures a avoir
-            une presence en ligne claire, credible et facile a maintenir.
+            Développeur web local à Valence, j'aide les praticiens, indépendants, associations
+            et petites structures à créer une présence en ligne claire, sans jargon technique.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href={`mailto:${contactEmail}?subject=Demande de devis pour un site web`}>
-              Demander un devis
-            </a>
+            <a class="button primary" href={mailHref}>Demander une première estimation</a>
             <a class="button secondary" href="#offres">Voir les offres</a>
           </div>
           <p class="small-note">
-            Pas de jargon inutile. Pas de promesse magique. Un site propre, adapte a votre besoin, avec un budget annonce avant de commencer.
+            L'objectif n'est pas de faire un gros site compliqué. L'objectif est de vous aider à inspirer confiance,
+            expliquer clairement ce que vous faites et faciliter la prise de contact.
           </p>
         </div>
 
-        <aside class="hero-card" aria-label="Resume de l'offre">
+        <aside class="hero-card" aria-label="Résumé de l'approche">
           <div class="availability">
             <span class="status-dot" aria-hidden="true"></span>
-            Disponible pour nouveaux projets
+            Disponibilité limitée pour projets simples
           </div>
           <dl>
             <div>
-              <dt>Experience</dt>
+              <dt>Expérience</dt>
               <dd>9 ans env.</dd>
             </div>
             <div>
-              <dt>Premier site</dt>
-              <dd>des 390 EUR</dd>
+              <dt>Premier format</dt>
+              <dd>dès 390 €</dd>
             </div>
             <div>
-              <dt>Approche</dt>
-              <dd>Claire et directe</dd>
+              <dt>Contact</dt>
+              <dd>Email</dd>
             </div>
           </dl>
           <p>
-            Je choisis la solution technique selon votre besoin: site simple ultra rapide, WordPress si vous voulez modifier le contenu vous-meme, ou developpement leger sur mesure.
+            Je choisis la solution technique selon votre besoin : site simple ultra rapide, WordPress si vous voulez
+            modifier le contenu vous-même, ou développement léger sur mesure.
           </p>
         </aside>
       </section>
 
-      <section class="audience-bar" aria-label="Publics concernes">
-        {audiences.map((audience) => <span>{audience}</span>)}
+      <section id="pour-qui" class="audience-section section-pad compact">
+        <div class="section-heading center">
+          <p class="eyebrow">Pour qui ?</p>
+          <h2>Des projets simples, humains et bien cadrés.</h2>
+          <p>
+            Je privilégie les personnes qui veulent une présence web claire, utile et rassurante,
+            sans se lancer dans un projet lourd.
+          </p>
+        </div>
+        <div class="audience-bar" aria-label="Publics concernés">
+          {audiences.map((audience) => <span>{audience}</span>)}
+        </div>
+        <p class="local-note">
+          Basé à Valence, je peux accompagner des projets en Drôme et Ardèche : Bourg-lès-Valence,
+          Romans-sur-Isère, Guilherand-Granges, Tournon-sur-Rhône, Crest, et à distance si le cadre est clair.
+        </p>
       </section>
 
-      <section class="split-section section-pad">
-        <div class="section-heading">
-          <p class="eyebrow">Problemes frequents</p>
-          <h2>Un site doit aider vos clients a comprendre, pas les perdre.</h2>
+      <section class="fit-section section-pad">
+        <div class="fit-card good">
+          <p class="eyebrow">Fait pour vous si</p>
+          <h2>Vous voulez avancer simplement.</h2>
+          <ul class="plain-list">
+            {goodFit.map((item) => <li>{item}</li>)}
+          </ul>
         </div>
-        <div class="problem-grid">
-          {problems.map((problem) => (
-            <article class="problem-card">
-              <span aria-hidden="true"></span>
-              <p>{problem}</p>
-            </article>
-          ))}
+        <div class="fit-card careful">
+          <p class="eyebrow">Pas forcément adapté si</p>
+          <h2>Votre besoin demande un gros dispositif.</h2>
+          <ul class="plain-list">
+            {badFit.map((item) => <li>{item}</li>)}
+          </ul>
         </div>
       </section>
 
       <section id="services" class="section-pad services-section">
         <div class="section-heading narrow">
-          <p class="eyebrow">Ce que je cree</p>
-          <h2>Des livrables concrets, pas un catalogue technique.</h2>
+          <p class="eyebrow">Ce que je crée</p>
+          <h2>Des sites sobres, lisibles et faciles à maintenir.</h2>
           <p>
-            L'objectif est simple: presenter votre activite, rassurer vos visiteurs et rendre la prise de contact evidente.
+            Les clients non techniques doivent comprendre le résultat, pas la pile technique.
+            Mon travail consiste à rendre votre activité claire et crédible en ligne.
           </p>
         </div>
         <div class="deliverable-grid">
@@ -290,42 +357,62 @@ const faqs = [
       <section id="offres" class="section-pad offers-section">
         <div class="section-heading center">
           <p class="eyebrow">Offres</p>
-          <h2>Trois points de depart simples.</h2>
-          <p>Chaque projet est ajuste apres un premier echange, mais vous partez avec un ordre de prix clair.</p>
+          <h2>Trois formats pour tester sans partir dans trop grand.</h2>
+          <p>
+            Les prix affichés sont des bases. Chaque projet est ajusté après un premier échange,
+            selon le contenu, le délai et le niveau d'accompagnement souhaité.
+          </p>
         </div>
         <div class="offer-grid">
           {offers.map((offer) => (
             <article class:list={["offer-card", { featured: offer.highlighted }]}>
-              {offer.highlighted && <span class="offer-badge">Le plus courant</span>}
+              {offer.highlighted && <span class="offer-badge">Le plus rassurant</span>}
               <h3>{offer.name}</h3>
               <p class="price">{offer.price}</p>
+              <p class="delay">{offer.delay}</p>
               <p class="best-for">{offer.bestFor}</p>
               <ul class="check-list">
                 {offer.items.map((item) => <li>{item}</li>)}
               </ul>
-              <a class="button offer-button" href={`mailto:${contactEmail}?subject=${encodeURIComponent(`Demande - ${offer.name}`)}`}>
-                Parler de ce besoin
-              </a>
+              <a class="button offer-button" href={mailHref}>Parler de ce besoin</a>
             </article>
           ))}
         </div>
+
         <aside class="secondary-offer">
           <div>
-            <p class="eyebrow">Besoin specifique</p>
+            <p class="eyebrow">À garder simple</p>
             <h3>Mini outil web sur mesure</h3>
             <p>
-              A partir de 500 EUR: calculateur, formulaire avance, generateur de devis simple,
-              tableau de suivi ou automatisation legere.
+              Sur devis, à partir de 600 € : calculateur simple, formulaire avancé, générateur de devis,
+              tableau de suivi ou automatisation légère. Je le propose seulement si le besoin est clair.
             </p>
           </div>
           <a href="#contact">En parler</a>
         </aside>
       </section>
 
+      <section class="section-pad price-section">
+        <div class="section-heading narrow">
+          <p class="eyebrow">Prix transparents</p>
+          <h2>Ce qui peut faire varier le budget.</h2>
+          <p>
+            Je préfère annoncer un cadre réaliste plutôt que vendre un prix trop bas qui devient frustrant ensuite.
+          </p>
+        </div>
+        <div class="factor-grid">
+          {pricingFactors.map((factor) => <span>{factor}</span>)}
+        </div>
+      </section>
+
       <section class="section-pad process-section">
         <div class="section-heading narrow">
           <p class="eyebrow">Process</p>
-          <h2>Vous savez ou vous allez avant de payer.</h2>
+          <h2>Un cadre clair pour éviter la charge mentale.</h2>
+          <p>
+            Je limite les réunions longues, les urgences et les projets flous. Un projet simple fonctionne mieux
+            quand chacun sait ce qu'il apporte et ce qu'il valide.
+          </p>
         </div>
         <div class="process-grid">
           {process.map(([number, title, text]) => (
@@ -340,10 +427,10 @@ const faqs = [
 
       <section id="exemples" class="section-pad demos-section">
         <div class="section-heading center">
-          <p class="eyebrow">Exemples de realisations possibles</p>
-          <h2>Des demos realistes, pas de faux clients.</h2>
+          <p class="eyebrow">Exemples de projets possibles</p>
+          <h2>Des exemples réalistes, pas de faux clients.</h2>
           <p>
-            Ces exemples montrent des directions possibles. Ils ne sont pas presentes comme des missions client reelles.
+            Ces exemples montrent des directions possibles. Ils ne sont pas présentés comme des missions client réelles.
           </p>
         </div>
         <div class="demo-grid">
@@ -351,10 +438,14 @@ const faqs = [
             <article class="demo-card">
               <img src={demo.image} alt={demo.alt} loading="lazy" />
               <div class="demo-content">
-                <p class="category">Projet demo</p>
+                <p class="category">Exemple possible</p>
                 <h3>{demo.title}</h3>
                 <div class="result-block">
-                  <strong>Probleme</strong>
+                  <strong>Contexte</strong>
+                  <p>{demo.context}</p>
+                </div>
+                <div class="result-block">
+                  <strong>Problème</strong>
                   <p>{demo.problem}</p>
                 </div>
                 <div class="result-block">
@@ -362,7 +453,7 @@ const faqs = [
                   <p>{demo.solution}</p>
                 </div>
                 <div class="result-block">
-                  <strong>Resultat attendu</strong>
+                  <strong>Résultat attendu</strong>
                   <p>{demo.result}</p>
                 </div>
               </div>
@@ -371,13 +462,19 @@ const faqs = [
         </div>
       </section>
 
-      <section class="section-pad trust-section">
-        <div class="trust-intro">
-          <p class="eyebrow">Pourquoi me faire confiance</p>
-          <h2>Une approche d'artisan du web: serieuse, claire, maintenable.</h2>
+      <section id="profil" class="section-pad profile-section">
+        <div class="profile-card">
+          <p class="eyebrow">Qui suis-je ?</p>
+          <h2>Je suis Quentin, développeur web à Valence.</h2>
           <p>
-            Je ne suis pas une grosse agence. Vous echangez directement avec la personne qui comprend,
-            construit et livre le site.
+            Je travaille dans le développement web depuis environ 9 ans. Mon approche est simple :
+            créer des sites propres, rapides et compréhensibles, sans noyer les clients dans la technique.
+            J'aime les projets bien cadrés, les échanges clairs et les solutions utiles plutôt que les effets de mode.
+          </p>
+          <p>
+            Mon expérience me permet de faire les choses proprement, mais mon objectif ici reste volontairement simple :
+            accompagner des indépendants, praticiens, associations et petites structures sur des projets utiles, raisonnables
+            et maintenables.
           </p>
         </div>
         <div class="trust-grid">
@@ -407,21 +504,24 @@ const faqs = [
 
       <section id="contact" class="contact-section">
         <div>
-          <p class="eyebrow">Contact</p>
-          <h2>Decrivez-moi votre besoin, je vous reponds avec une premiere estimation.</h2>
+          <p class="eyebrow">Contact guidé</p>
+          <h2>Pour me contacter, envoyez-moi simplement ces éléments.</h2>
           <p>
-            Indiquez votre activite, le type de site souhaite, votre delai ideal et les contenus deja disponibles.
-            Je vous dirai franchement ce qui est utile, ce qui ne l'est pas, et par quoi commencer.
+            Pas besoin d'un cahier des charges complet. Une base claire suffit pour que je vous réponde
+            avec une première estimation et une recommandation honnête.
           </p>
+          <ul class="contact-list">
+            {contactChecklist.map((item) => <li>{item}</li>)}
+          </ul>
         </div>
         <div class="contact-actions">
-          <a class="button primary" href={`mailto:${contactEmail}?subject=Demande de devis pour un site web`}>
-            {contactEmail}
-          </a>
+          <a class="button primary" href={mailHref}>M'envoyer mon besoin</a>
+          <a class="button ghost" href={mailHref}>Demander une première estimation</a>
           <div class="social-links" aria-label="Liens secondaires">
-            <a href={githubUrl} rel="noreferrer" target="_blank">GitHub</a>
             <a href={linkedinUrl} rel="noreferrer" target="_blank">LinkedIn</a>
+            <a href={githubUrl} rel="noreferrer" target="_blank">GitHub</a>
           </div>
+          <p class="email-note">{contactEmail}</p>
         </div>
       </section>
     </main>
@@ -431,17 +531,18 @@ const faqs = [
 <style>
   :root {
     color-scheme: light;
-    --bg: #f6f3ed;
-    --bg-soft: #ede8df;
+    --bg: #f7f4ef;
+    --bg-soft: #eee8df;
     --surface: #ffffff;
-    --ink: #1e1f22;
-    --muted: #66615b;
-    --line: #ded7cc;
-    --accent: #126f73;
-    --accent-dark: #0b4b4f;
-    --warm: #b85f42;
-    --success: #2f7d4a;
-    --shadow: 0 18px 54px rgba(30, 31, 34, 0.1);
+    --ink: #202124;
+    --muted: #67615b;
+    --line: #ddd4c8;
+    --accent: #5d7768;
+    --accent-dark: #334f43;
+    --warm: #a96a4c;
+    --soft-green: #edf4ef;
+    --soft-warm: #f5ece5;
+    --shadow: 0 18px 48px rgba(32, 33, 36, 0.1);
     --radius: 8px;
   }
 
@@ -489,8 +590,8 @@ const faqs = [
     justify-content: space-between;
     gap: 24px;
     padding: 16px clamp(20px, 5vw, 76px);
-    border-bottom: 1px solid rgba(222, 215, 204, 0.78);
-    background: rgba(246, 243, 237, 0.92);
+    border-bottom: 1px solid rgba(221, 212, 200, 0.78);
+    background: rgba(247, 244, 239, 0.94);
     backdrop-filter: blur(14px);
   }
 
@@ -512,7 +613,7 @@ const faqs = [
     gap: clamp(12px, 2.4vw, 28px);
     color: var(--muted);
     font-size: 0.94rem;
-    font-weight: 750;
+    font-weight: 760;
   }
 
   nav a:hover {
@@ -523,10 +624,14 @@ const faqs = [
     padding: clamp(58px, 8vw, 112px) clamp(20px, 5vw, 76px);
   }
 
+  .section-pad.compact {
+    padding-top: clamp(38px, 6vw, 76px);
+  }
+
   .hero {
     display: grid;
     min-height: calc(100vh - 73px);
-    grid-template-columns: minmax(0, 1.22fr) minmax(300px, 0.78fr);
+    grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
     gap: clamp(32px, 6vw, 84px);
     align-items: center;
   }
@@ -549,18 +654,18 @@ const faqs = [
   }
 
   h1 {
-    max-width: 1060px;
-    font-size: clamp(2.55rem, 6.4vw, 6.35rem);
-    line-height: 0.96;
+    max-width: 980px;
+    font-size: clamp(2.45rem, 5.8vw, 5.9rem);
+    line-height: 0.98;
   }
 
   h2 {
-    font-size: clamp(2rem, 4.4vw, 4rem);
-    line-height: 1;
+    font-size: clamp(1.9rem, 4vw, 3.6rem);
+    line-height: 1.03;
   }
 
   h3 {
-    font-size: 1.18rem;
+    font-size: 1.16rem;
     line-height: 1.25;
   }
 
@@ -568,16 +673,16 @@ const faqs = [
     max-width: 760px;
     margin: 28px 0 0;
     color: var(--muted);
-    font-size: clamp(1.08rem, 2vw, 1.38rem);
-    line-height: 1.58;
+    font-size: clamp(1.08rem, 2vw, 1.35rem);
+    line-height: 1.6;
   }
 
   .small-note {
-    max-width: 720px;
+    max-width: 740px;
     margin: 18px 0 0;
     color: var(--muted);
     font-size: 0.98rem;
-    line-height: 1.55;
+    line-height: 1.58;
   }
 
   .hero-actions,
@@ -610,14 +715,27 @@ const faqs = [
     background: var(--accent-dark);
   }
 
-  .button.secondary {
+  .button.secondary,
+  .button.ghost {
     background: transparent;
   }
 
-  .hero-card {
+  .hero-card,
+  .fit-card,
+  .deliverable-card,
+  .offer-card,
+  .process-step,
+  .demo-card,
+  .profile-card,
+  .trust-grid article,
+  details,
+  .secondary-offer {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
+  }
+
+  .hero-card {
     box-shadow: var(--shadow);
     padding: clamp(24px, 4vw, 34px);
   }
@@ -626,11 +744,11 @@ const faqs = [
     display: inline-flex;
     gap: 10px;
     align-items: center;
-    border: 1px solid #cde1d3;
+    border: 1px solid #d0ddcf;
     border-radius: 999px;
     padding: 8px 12px;
-    color: #235f39;
-    background: #f1f8f3;
+    color: var(--accent-dark);
+    background: var(--soft-green);
     font-size: 0.9rem;
     font-weight: 850;
   }
@@ -639,7 +757,7 @@ const faqs = [
     width: 9px;
     height: 9px;
     border-radius: 999px;
-    background: var(--success);
+    background: var(--accent);
   }
 
   dl {
@@ -659,7 +777,7 @@ const faqs = [
 
   dt {
     color: var(--muted);
-    font-weight: 750;
+    font-weight: 760;
   }
 
   dd {
@@ -668,20 +786,34 @@ const faqs = [
     text-align: right;
   }
 
-  .hero-card p {
-    margin: 0;
+  .hero-card p,
+  .section-heading p:not(.eyebrow),
+  .local-note,
+  .deliverable-card p,
+  .process-step p,
+  .trust-grid p,
+  .result-block p,
+  .profile-card p,
+  .secondary-offer p,
+  .contact-section p,
+  details p {
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.62;
+  }
+
+  .audience-section {
+    background: var(--surface);
   }
 
   .audience-bar {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
-    padding: 0 clamp(20px, 5vw, 76px) 28px;
   }
 
-  .audience-bar span {
+  .audience-bar span,
+  .factor-grid span {
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 9px 13px;
@@ -690,17 +822,23 @@ const faqs = [
     font-weight: 800;
   }
 
+  .local-note {
+    max-width: 900px;
+    margin: 24px auto 0;
+    text-align: center;
+  }
+
   .section-heading {
     max-width: 850px;
     margin-bottom: 34px;
   }
 
   .section-heading.narrow {
-    max-width: 740px;
+    max-width: 760px;
   }
 
   .section-heading.center {
-    max-width: 780px;
+    max-width: 840px;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
@@ -708,63 +846,54 @@ const faqs = [
 
   .section-heading p:not(.eyebrow) {
     margin: 18px 0 0;
-    color: var(--muted);
     font-size: 1.06rem;
-    line-height: 1.62;
   }
 
-  .split-section {
+  .fit-section {
     display: grid;
-    grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(28px, 5vw, 70px);
-    align-items: start;
-    background: var(--surface);
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    background: var(--bg-soft);
   }
 
-  .problem-grid,
-  .deliverable-grid,
-  .trust-grid {
+  .fit-card {
+    padding: clamp(24px, 4vw, 34px);
+  }
+
+  .fit-card.good {
+    background: var(--soft-green);
+  }
+
+  .fit-card.careful {
+    background: var(--soft-warm);
+  }
+
+  .plain-list,
+  .check-list,
+  .contact-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: 10px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .problem-card,
-  .deliverable-card,
-  .offer-card,
-  .process-step,
-  .demo-card,
-  .trust-grid article,
-  details,
-  .secondary-offer {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface);
+  .plain-list li,
+  .check-list li,
+  .contact-list li {
+    position: relative;
+    padding-left: 24px;
+    line-height: 1.48;
   }
 
-  .problem-card {
-    display: flex;
-    gap: 14px;
-    padding: 18px;
-  }
-
-  .problem-card span {
-    width: 10px;
-    height: 10px;
-    flex: 0 0 auto;
-    margin-top: 8px;
-    border-radius: 999px;
-    background: var(--warm);
-  }
-
-  .problem-card p,
-  .deliverable-card p,
-  .process-step p,
-  .trust-grid p,
-  .result-block p {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.58;
+  .plain-list li::before,
+  .check-list li::before,
+  .contact-list li::before {
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    content: "+";
+    font-weight: 900;
   }
 
   .services-section,
@@ -773,17 +902,20 @@ const faqs = [
     background: var(--bg);
   }
 
-  .deliverable-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .deliverable-grid,
+  .factor-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
   }
 
   .deliverable-card {
-    min-height: 190px;
+    min-height: 175px;
     padding: 22px;
   }
 
   .deliverable-card p {
-    margin-top: 14px;
+    margin: 14px 0 0;
   }
 
   .offers-section,
@@ -817,17 +949,24 @@ const faqs = [
     margin-bottom: 18px;
     border-radius: 999px;
     padding: 7px 10px;
-    background: #e8f5f4;
+    background: var(--soft-green);
     color: var(--accent-dark);
     font-size: 0.82rem;
     font-weight: 900;
   }
 
   .price {
-    margin: 14px 0 16px;
+    margin: 14px 0 8px;
     color: var(--accent-dark);
     font-size: 1.55rem;
     font-weight: 950;
+  }
+
+  .delay {
+    margin: 0 0 16px;
+    color: var(--warm);
+    font-size: 0.95rem;
+    font-weight: 850;
   }
 
   .best-for {
@@ -835,29 +974,6 @@ const faqs = [
     margin: 0;
     color: var(--muted);
     line-height: 1.55;
-  }
-
-  .check-list {
-    display: grid;
-    gap: 10px;
-    margin: 22px 0 26px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .check-list li {
-    position: relative;
-    padding-left: 24px;
-    color: var(--ink);
-    line-height: 1.45;
-  }
-
-  .check-list li::before {
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    content: "+";
-    font-weight: 900;
   }
 
   .offer-button {
@@ -875,16 +991,22 @@ const faqs = [
   }
 
   .secondary-offer p {
-    max-width: 820px;
+    max-width: 850px;
     margin: 10px 0 0;
-    color: var(--muted);
-    line-height: 1.55;
   }
 
   .secondary-offer a {
     flex: 0 0 auto;
     color: var(--accent-dark);
     font-weight: 900;
+  }
+
+  .price-section {
+    background: var(--surface);
+  }
+
+  .factor-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .process-grid {
@@ -913,7 +1035,7 @@ const faqs = [
 
   .demo-card {
     overflow: hidden;
-    box-shadow: 0 16px 42px rgba(30, 31, 34, 0.08);
+    box-shadow: 0 16px 42px rgba(32, 33, 36, 0.08);
   }
 
   .demo-card img {
@@ -936,16 +1058,25 @@ const faqs = [
     margin-bottom: 6px;
   }
 
-  .trust-section {
+  .profile-section {
     display: grid;
-    grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
     gap: clamp(28px, 5vw, 70px);
     background: var(--surface);
   }
 
-  .trust-intro p:not(.eyebrow) {
-    color: var(--muted);
-    line-height: 1.65;
+  .profile-card {
+    padding: clamp(24px, 4vw, 34px);
+  }
+
+  .profile-card p {
+    margin: 18px 0 0;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
 
   .trust-grid article {
@@ -956,13 +1087,14 @@ const faqs = [
 
   .trust-grid span {
     display: grid;
-    width: 26px;
+    width: 30px;
     height: 26px;
     flex: 0 0 auto;
     place-items: center;
     border-radius: 999px;
-    background: #e8f5f4;
+    background: var(--soft-green);
     color: var(--accent-dark);
+    font-size: 0.75rem;
     font-weight: 950;
   }
 
@@ -985,13 +1117,11 @@ const faqs = [
   details p {
     margin: 0;
     padding: 0 22px 22px;
-    color: var(--muted);
-    line-height: 1.62;
   }
 
   .contact-section {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.45fr);
     gap: clamp(24px, 5vw, 60px);
     align-items: center;
     margin: 0 clamp(20px, 5vw, 76px) clamp(32px, 5vw, 60px);
@@ -1002,26 +1132,36 @@ const faqs = [
   }
 
   .contact-section .eyebrow {
-    color: #85d7d4;
+    color: #b9d7c6;
   }
 
-  .contact-section p:not(.eyebrow) {
-    max-width: 860px;
-    color: rgba(255, 255, 255, 0.74);
-    line-height: 1.65;
+  .contact-section p,
+  .contact-list li {
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .contact-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 22px;
   }
 
   .contact-actions {
-    justify-content: flex-end;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 0;
+  }
+
+  .contact-actions .button {
+    width: 100%;
+    color: #fff;
   }
 
   .social-links {
     display: flex;
     gap: 14px;
-    width: 100%;
-    justify-content: flex-end;
-    color: rgba(255, 255, 255, 0.7);
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.92rem;
   }
 
@@ -1029,17 +1169,24 @@ const faqs = [
     color: #fff;
   }
 
+  .email-note {
+    margin: 0;
+    text-align: center;
+    font-size: 0.92rem;
+  }
+
   @media (max-width: 1180px) {
     .deliverable-grid,
+    .factor-grid,
     .process-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (max-width: 940px) {
+  @media (max-width: 980px) {
     .hero,
-    .split-section,
-    .trust-section,
+    .fit-section,
+    .profile-section,
     .contact-section {
       grid-template-columns: 1fr;
     }
@@ -1051,11 +1198,6 @@ const faqs = [
 
     .best-for {
       min-height: auto;
-    }
-
-    .contact-actions,
-    .social-links {
-      justify-content: flex-start;
     }
   }
 
@@ -1076,10 +1218,11 @@ const faqs = [
       padding-top: 46px;
     }
 
-    .problem-grid,
     .deliverable-grid,
+    .factor-grid,
     .process-grid,
-    .trust-grid {
+    .trust-grid,
+    .contact-list {
       grid-template-columns: 1fr;
     }
 
