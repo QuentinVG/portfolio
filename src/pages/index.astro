@@ -6,10 +6,10 @@ const linkedinUrl = "https://www.linkedin.com/in/qvg/";
 const asset = (path: string) =>
   `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
 
-const mailSubject = "Demande de première estimation pour un site web";
+const mailSubject = "Demande d'estimation pour un site web";
 const mailBody = `Bonjour Quentin,
 
-Je souhaite vous contacter pour un projet de site web.
+Je vous contacte pour un projet de site web.
 
 Mon activité :
 Ma ville / zone :
@@ -17,7 +17,7 @@ Mon objectif principal :
 Ai-je déjà un site ? :
 Délai souhaité :
 Budget approximatif :
-Contenus déjà disponibles : textes / photos / logo / nom de domaine
+Éléments déjà disponibles : textes / photos / logo / nom de domaine
 
 Merci,`;
 const mailHref = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
@@ -32,37 +32,37 @@ const audiences = [
 ];
 
 const goodFit = [
-  "Vous voulez une présence en ligne claire sans vous prendre la tête.",
+  "Vous voulez une présence en ligne claire, sans vous perdre dans la technique.",
   "Vous avez besoin d'un site simple pour rassurer vos futurs clients.",
-  "Vous voulez pouvoir envoyer un lien propre à quelqu'un.",
-  "Vous voulez être accompagné sans jargon technique.",
+  "Vous voulez pouvoir envoyer un lien propre et crédible.",
+  "Vous souhaitez être accompagné avec des explications simples.",
   "Vous préférez une approche humaine, directe et bien cadrée.",
 ];
 
 const badFit = [
-  "Vous cherchez un gros site e-commerce ou une application complexe.",
-  "Vous voulez une disponibilité immédiate tous les jours.",
+  "Vous cherchez un site e-commerce important ou une application complexe.",
+  "Vous avez besoin d'une disponibilité immédiate au quotidien.",
   "Vous attendez une stratégie marketing complète.",
-  "Vous n'avez pas encore clarifié votre activité, vos offres ou vos contenus.",
-  "Vous cherchez uniquement le prix le plus bas possible.",
+  "Votre activité, vos offres ou vos contenus ne sont pas encore clarifiés.",
+  "Votre critère principal est le prix le plus bas possible.",
 ];
 
 const deliverables = [
   {
     title: "Sites vitrines",
-    text: "Une présence complète pour présenter votre activité, vos services et faciliter la prise de contact.",
+    text: "Une présence en ligne structurée pour présenter votre activité, vos services et faciliter la prise de contact.",
   },
   {
     title: "Pages simples",
-    text: "Une page claire pour présenter une offre, un événement ou démarrer avec une présence en ligne propre.",
+    text: "Une page claire pour présenter une offre, un événement ou démarrer avec une présence en ligne simple.",
   },
   {
     title: "Refontes légères",
-    text: "Un site plus lisible, plus moderne et plus rassurant sans transformer le projet en chantier lourd.",
+    text: "Un site plus lisible, plus moderne et plus rassurant, sans transformer le projet en chantier lourd.",
   },
   {
     title: "Suivi mensuel",
-    text: "Un accompagnement léger pour garder votre site propre, à jour et vivant dans le temps.",
+    text: "Un accompagnement léger pour garder votre site propre, à jour et vivant dans la durée.",
   },
 ];
 
@@ -71,10 +71,10 @@ const offers = [
     name: "Page Simple",
     price: "à partir de 390 €",
     delay: "Délai indicatif : 1 à 2 semaines",
-    bestFor: "Pour présenter une activité, une offre, un événement ou commencer avec une présence en ligne claire.",
+    bestFor: "Pour présenter une activité, une offre, un événement ou poser une première présence en ligne claire.",
     items: [
       "Une page responsive",
-      "Présentation claire de l'activité",
+      "Présentation claire de votre activité",
       "Structure adaptée au mobile",
       "Bouton ou formulaire de contact",
       "Optimisation de base",
@@ -86,7 +86,7 @@ const offers = [
     price: "à partir de 890 €",
     delay: "Délai indicatif : 3 à 4 semaines",
     highlighted: true,
-    bestFor: "Pour une présence plus complète, plus rassurante et plus facile à partager.",
+    bestFor: "Pour une présence plus complète, plus rassurante et facile à partager.",
     items: [
       "3 à 5 pages",
       "Accueil, services, à propos, contact, mentions légales",
@@ -101,8 +101,8 @@ const offers = [
   {
     name: "Suivi Mensuel",
     price: "à partir de 79 € / mois",
-    delay: "Accompagnement léger, sans urgence 24/7",
-    bestFor: "Pour garder un site propre, à jour et vivant, avec des délais raisonnables.",
+    delay: "Accompagnement léger, sans urgence permanente",
+    bestFor: "Pour garder un site propre, à jour et vivant, avec un rythme raisonnable.",
     items: [
       "Petites modifications",
       "Corrections mineures",
@@ -116,7 +116,7 @@ const offers = [
 
 const pricingFactors = [
   "Nombre de pages",
-  "Quantité de contenus à créer",
+  "Quantité de contenus à préparer",
   "Photos ou visuels à préparer",
   "Besoin WordPress ou non",
   "Formulaire avancé",
@@ -126,12 +126,12 @@ const pricingFactors = [
 ];
 
 const process = [
-  ["01", "Échange simple", "Vous m'expliquez votre activité, votre objectif et ce que le site doit permettre."],
-  ["02", "Cadrage", "Je vous dis franchement ce qui est utile, ce qui ne l'est pas, le budget et le délai réalistes."],
-  ["03", "Création", "Je construis une version propre, lisible sur mobile et adaptée à votre niveau d'autonomie."],
-  ["04", "Retours", "On ajuste les textes, les priorités et les détails importants sans multiplier les réunions."],
-  ["05", "Mise en ligne", "Je vous accompagne pour le domaine, l'hébergement et les derniers réglages si besoin."],
-  ["06", "Suivi léger", "Vous pouvez ensuite demander des petites corrections ou mises à jour, sans support permanent."],
+  ["01", "Échange simple", "Vous m'expliquez votre activité, votre objectif et ce que le site doit aider à faire."],
+  ["02", "Cadrage", "Je vous indique ce qui est utile, ce qui ne l'est pas, le budget et le délai réalistes."],
+  ["03", "Création", "Je construis une version propre, lisible sur mobile et adaptée à votre autonomie."],
+  ["04", "Retours", "On ajuste les textes, les priorités et les détails importants, sans multiplier les réunions."],
+  ["05", "Mise en ligne", "Je vous accompagne sur le domaine, l'hébergement et les derniers réglages si besoin."],
+  ["06", "Suivi léger", "Vous pouvez ensuite demander de petites corrections ou mises à jour, sans support permanent."],
 ];
 
 const demos = [
@@ -139,19 +139,19 @@ const demos = [
     title: "Praticien bien-être",
     image: asset("projects/coach-web.png"),
     alt: "Exemple de site pour praticien bien-être",
-    context: "Un praticien installé autour de Valence veut un site simple pour expliquer sa pratique et rassurer avant une première prise de contact.",
+    context: "Un praticien installé autour de Valence souhaite un site simple pour expliquer sa pratique et rassurer avant un premier contact.",
     problem: "Son activité est claire à l'oral, mais difficile à comprendre rapidement en ligne.",
     solution: "Une page d'accueil apaisante, une présentation courte, des informations pratiques et un bouton de contact visible.",
-    result: "Le visiteur comprend à qui s'adresse l'accompagnement et peut contacter le praticien sans hésiter.",
+    result: "Le visiteur comprend à qui s'adresse l'accompagnement et sait comment prendre contact.",
   },
   {
     title: "Artisan local",
     image: asset("projects/artisan-web.png"),
     alt: "Exemple de site pour artisan local",
-    context: "Un artisan soigneux en Drôme / Ardèche veut montrer son sérieux sans investir dans un site trop lourd.",
+    context: "Un artisan soigneux en Drôme ou en Ardèche veut montrer son sérieux sans investir dans un site trop lourd.",
     problem: "Les clients potentiels ne voient pas clairement les prestations, la zone d'intervention ou la manière de demander un devis.",
-    solution: "Une structure lisible avec services, zone couverte, exemples de réalisations et formulaire de demande.",
-    result: "Le site devient un support de confiance à envoyer après un premier échange ou une recommandation.",
+    solution: "Une structure lisible avec les services, la zone couverte, quelques réalisations et un formulaire de demande.",
+    result: "Le site devient un support de confiance à envoyer après une recommandation ou un premier échange.",
   },
   {
     title: "Association ou indépendant",
@@ -160,7 +160,7 @@ const demos = [
     context: "Une petite structure locale veut centraliser ses informations et éviter de répéter les mêmes réponses.",
     problem: "Horaires, lieu, activités, inscription et contact sont dispersés sur plusieurs supports.",
     solution: "Un site court, bien rangé, avec les informations essentielles et un contact facile.",
-    result: "Les visiteurs trouvent plus vite les bonnes informations, et la structure paraît plus fiable.",
+    result: "Les visiteurs trouvent plus vite les bonnes informations et la structure paraît plus fiable.",
   },
 ];
 
@@ -168,7 +168,7 @@ const trustItems = [
   "Environ 9 ans d'expérience professionnelle en développement web.",
   "Un profil de lead developer PHP, avec une approche volontairement simple côté client.",
   "Un interlocuteur unique pour comprendre, construire et livrer le site.",
-  "Des prix lisibles et un cadrage clair avant de commencer.",
+  "Des prix lisibles et un cadrage clair avant de démarrer.",
   "Pas de jargon technique inutile, pas de promesse SEO miracle.",
   "Des sites simples, rapides, maintenables et adaptés à votre besoin réel.",
   "J'utilise des outils modernes pour travailler efficacement, mais chaque projet est relu, adapté et livré proprement.",
@@ -188,12 +188,12 @@ const faqs = [
   {
     question: "Combien de temps prend un site ?",
     answer:
-      "Une page simple prend généralement 1 à 2 semaines selon ma disponibilité et les contenus fournis. Un site vitrine prend plutôt 3 à 4 semaines selon le nombre de pages, les retours et la mise en ligne.",
+      "Une page simple prend généralement 1 à 2 semaines, selon ma disponibilité et les contenus fournis. Un site vitrine prend plutôt 3 à 4 semaines, selon le nombre de pages, les retours et la mise en ligne.",
   },
   {
     question: "Est-ce que je peux modifier mon site moi-même ?",
     answer:
-      "Oui, si c'est important pour vous. Je peux choisir une solution comme WordPress. Si vous préférez un site très rapide et simple, je peux aussi gérer les petites modifications avec un suivi léger.",
+      "Oui, si c'est important pour vous. Je peux choisir une solution comme WordPress. Si vous préférez un site très simple et rapide, je peux aussi gérer les petites modifications avec un suivi léger.",
   },
   {
     question: "Est-ce que l'hébergement est inclus ?",
@@ -203,7 +203,7 @@ const faqs = [
   {
     question: "Est-ce qu'il y a un engagement mensuel ?",
     answer:
-      "Non. Le suivi mensuel est optionnel. Il sert à garder le site propre et vivant, mais ne correspond pas à une disponibilité immédiate 24/7.",
+      "Non. Le suivi mensuel est optionnel. Il sert à garder le site propre et vivant, mais ne correspond pas à une disponibilité immédiate ou permanente.",
   },
   {
     question: "Est-ce que vous faites le logo ?",
@@ -218,7 +218,7 @@ const faqs = [
   {
     question: "Est-ce que je dois déjà avoir les textes et les photos ?",
     answer:
-      "Pas forcément, mais il faut au moins une base. Je peux vous aider à structurer les textes, mais je ne propose pas une rédaction complète si rien n'est fourni.",
+      "Pas forcément, mais il faut au moins une base. Je peux vous aider à structurer les textes, mais je ne propose pas de rédaction complète si rien n'est fourni.",
   },
   {
     question: "Est-ce que le référencement Google est inclus ?",
@@ -236,7 +236,7 @@ const faqs = [
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Quentin Vial-Gouteyron, développeur web à Valence, crée des sites simples, propres et rassurants pour praticiens, indépendants, associations et petites structures en Drôme, Ardèche et à distance."
+      content="Quentin Vial-Gouteyron, développeur web à Valence, crée des sites simples, propres et rassurants pour praticiens, indépendants, associations et petites structures en Drôme, en Ardèche et à distance."
     />
     <meta name="generator" content={Astro.generator} />
     <title>Quentin Vial-Gouteyron - Sites web simples à Valence</title>
@@ -259,17 +259,17 @@ const faqs = [
       <section class="hero section-pad">
         <div class="hero-copy">
           <p class="eyebrow">{location}</p>
-          <h1>Un site simple, propre et rassurant pour présenter votre activité.</h1>
+          <h1>Un site simple, clair et rassurant pour présenter votre activité.</h1>
           <p class="lead">
-            Développeur web local à Valence, j'aide les praticiens, indépendants, associations
-            et petites structures à créer une présence en ligne claire, sans jargon technique.
+            Développeur web à Valence, j'aide les praticiens, indépendants, associations
+            et petites structures à créer une présence en ligne claire, sans jargon inutile.
           </p>
           <div class="hero-actions">
             <a class="button primary" href={mailHref}>Demander une première estimation</a>
             <a class="button secondary" href="#offres">Voir les offres</a>
           </div>
           <p class="small-note">
-            L'objectif n'est pas de faire un gros site compliqué. L'objectif est de vous aider à inspirer confiance,
+            Le but n'est pas de construire un site compliqué. Le but est de vous aider à inspirer confiance,
             expliquer clairement ce que vous faites et faciliter la prise de contact.
           </p>
         </div>
@@ -294,12 +294,12 @@ const faqs = [
             </div>
           </dl>
           <p>
-            Je choisis la solution technique selon votre besoin : site simple ultra rapide, WordPress si vous voulez
+            Je choisis la solution technique selon votre besoin : site simple et rapide, WordPress si vous voulez
             modifier le contenu vous-même, ou développement léger sur mesure.
           </p>
           <div class="scope-note">
             <strong>Le bon cadre</strong>
-            <span>Un besoin clair, quelques contenus, des retours groupés, puis une mise en ligne propre.</span>
+            <span>Un besoin clair, quelques contenus de départ, des retours groupés, puis une mise en ligne propre.</span>
           </div>
         </aside>
       </section>
@@ -310,15 +310,15 @@ const faqs = [
           <h2>Des projets simples, humains et bien cadrés.</h2>
           <p>
             Je privilégie les personnes qui veulent une présence web claire, utile et rassurante,
-            sans se lancer dans un projet lourd.
+            sans se lancer dans un projet trop lourd.
           </p>
         </div>
         <div class="audience-bar" aria-label="Publics concernés">
           {audiences.map((audience) => <span>{audience}</span>)}
         </div>
         <p class="local-note">
-          Basé à Valence, je peux accompagner des projets en Drôme et Ardèche : Bourg-lès-Valence,
-          Romans-sur-Isère, Guilherand-Granges, Tournon-sur-Rhône, Crest, et à distance si le cadre est clair.
+          Basé à Valence, je peux accompagner des projets en Drôme et en Ardèche : Bourg-lès-Valence,
+          Romans-sur-Isère, Guilherand-Granges, Tournon-sur-Rhône, Crest, et à distance lorsque le cadre est clair.
         </p>
       </section>
 
@@ -332,7 +332,7 @@ const faqs = [
         </div>
         <div class="fit-card careful">
           <p class="eyebrow">Pas forcément adapté si</p>
-          <h2>Votre besoin demande un gros dispositif.</h2>
+          <h2>Votre besoin demande un dispositif plus lourd.</h2>
           <ul class="plain-list">
             {badFit.map((item) => <li>{item}</li>)}
           </ul>
@@ -344,8 +344,8 @@ const faqs = [
           <p class="eyebrow">Ce que je crée</p>
           <h2>Des sites sobres, lisibles et faciles à maintenir.</h2>
           <p>
-            Les clients non techniques doivent comprendre le résultat, pas la pile technique.
-            Mon travail consiste à rendre votre activité claire et crédible en ligne.
+            Vos visiteurs doivent comprendre ce que vous proposez, pas la technologie utilisée.
+            Mon travail consiste à rendre votre activité claire, crédible et facile à contacter.
           </p>
         </div>
         <div class="deliverable-grid">
@@ -361,10 +361,10 @@ const faqs = [
       <section id="offres" class="section-pad offers-section">
         <div class="section-heading center">
           <p class="eyebrow">Offres</p>
-          <h2>Trois formats pour tester sans partir dans trop grand.</h2>
+          <h2>Trois formats pour démarrer sans voir trop grand.</h2>
           <p>
             Les prix affichés sont des bases. Chaque projet est ajusté après un premier échange,
-            selon le contenu, le délai et le niveau d'accompagnement souhaité.
+            selon les contenus, le délai et le niveau d'accompagnement souhaité.
           </p>
         </div>
         <div class="offer-grid">
@@ -386,11 +386,11 @@ const faqs = [
 
         <aside class="secondary-offer">
           <div>
-            <p class="eyebrow">À garder simple</p>
+            <p class="eyebrow">À garder bien cadré</p>
             <h3>Mini outil web sur mesure</h3>
             <p>
               Sur devis, à partir de 600 € : calculateur simple, formulaire avancé, générateur de devis,
-              tableau de suivi ou automatisation légère. Je le propose seulement si le besoin est clair.
+              tableau de suivi ou automatisation légère. Je le propose uniquement si le besoin est clair et limité.
             </p>
           </div>
           <a href="#contact">En parler</a>
@@ -402,7 +402,7 @@ const faqs = [
           <p class="eyebrow">Prix transparents</p>
           <h2>Ce qui peut faire varier le budget.</h2>
           <p>
-            Je préfère annoncer un cadre réaliste plutôt que vendre un prix trop bas qui devient frustrant ensuite.
+            Je préfère annoncer un cadre réaliste plutôt qu'un prix trop bas qui devient frustrant par la suite.
           </p>
         </div>
         <div class="factor-grid">
@@ -413,14 +413,14 @@ const faqs = [
       <section class="section-pad process-section">
         <div class="section-heading narrow">
           <p class="eyebrow">Process</p>
-          <h2>Un cadre clair pour éviter la charge mentale.</h2>
+          <h2>Un cadre clair pour limiter la charge mentale.</h2>
           <p>
             Je limite les réunions longues, les urgences et les projets flous. Un projet simple fonctionne mieux
-            quand chacun sait ce qu'il apporte et ce qu'il valide.
+            quand chacun sait ce qu'il apporte, ce qu'il valide et à quel moment.
           </p>
         </div>
         <p class="process-note">
-          Le but est de regrouper les décisions importantes, éviter les allers-retours permanents et garder un rythme compatible avec une activité complémentaire.
+          Le but est de regrouper les décisions importantes, d'éviter les allers-retours permanents et de garder un rythme compatible avec une activité complémentaire.
         </p>
         <div class="process-grid">
           {process.map(([number, title, text]) => (
@@ -436,9 +436,9 @@ const faqs = [
       <section id="exemples" class="section-pad demos-section">
         <div class="section-heading center">
           <p class="eyebrow">Exemples de projets possibles</p>
-          <h2>Des exemples réalistes, pas de faux clients.</h2>
+          <h2>Des exemples réalistes, sans faux clients.</h2>
           <p>
-            Ces exemples montrent des directions possibles. Ils ne sont pas présentés comme des missions client réelles.
+            Ces exemples montrent des directions possibles. Ils ne sont pas présentés comme des missions réalisées pour de vrais clients.
           </p>
         </div>
         <div class="demo-grid">
@@ -498,7 +498,7 @@ const faqs = [
       <section id="faq" class="section-pad faq-section">
         <div class="section-heading narrow">
           <p class="eyebrow">FAQ</p>
-          <h2>Les questions normales avant de se lancer.</h2>
+          <h2>Les questions utiles avant de se lancer.</h2>
         </div>
         <div class="faq-list">
           {faqs.map((faq) => (
