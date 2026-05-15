@@ -1,6 +1,6 @@
 # Portfolio - Quentin Vial-Gouteyron
 
-Portfolio Astro pour présenter un positionnement de développeur web PHP orienté sites utiles, outils métier légers, automatisations simples et cadrage technique.
+Portfolio Astro pour présenter un positionnement de développeur web PHP orienté outils web métier, sites utiles, automatisations simples et cadrage technique.
 
 ## Objectif
 
@@ -9,7 +9,7 @@ Le site sert à montrer une approche pragmatique :
 - clarifier un besoin métier ;
 - découper un projet raisonnable ;
 - construire un site ou outil utile ;
-- éviter les projets trop flous ou incompatibles avec une disponibilité limitée.
+- éviter les projets trop instables ou incompatibles avec une disponibilité limitée.
 
 ## Pages
 

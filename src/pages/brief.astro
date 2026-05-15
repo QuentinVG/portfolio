@@ -31,8 +31,8 @@ const asset = (path: string) =>
     <main>
       <section class="hero section-pad">
         <div>
-          <p class="eyebrow">Brief Builder</p>
-          <h1>Préparer un projet web sans partir dans le flou.</h1>
+          <p class="eyebrow">Assistant de cadrage</p>
+          <h1>Préparer un projet web avec un périmètre clair.</h1>
           <p class="lead">
             Répondez à quelques questions. L'assistant estime la complexité, signale les risques,
             liste les points à clarifier et génère un résumé prêt à envoyer.
@@ -51,7 +51,7 @@ const asset = (path: string) =>
         <aside class="app-sidebar">
           <div class="progress-panel" aria-live="polite">
             <strong id="progress-label">Progression : 0/4</strong>
-            <p id="progress-text">Complétez les champs utiles pour obtenir un brief exploitable.</p>
+            <p id="progress-text">Complétez les champs utiles pour obtenir une synthèse exploitable.</p>
             <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
           </div>
           <nav class="step-nav" aria-label="Étapes du brief">
@@ -70,7 +70,7 @@ const asset = (path: string) =>
               <span>01</span>
               <div>
                 <p class="eyebrow">Besoin</p>
-                <h2>Quel type de projet préparez-vous ?</h2>
+                <h2>Quel résultat voulez-vous obtenir ?</h2>
               </div>
             </div>
             <div class="option-grid">
@@ -82,7 +82,7 @@ const asset = (path: string) =>
             </div>
             <label class="field">
               Objectif principal
-              <textarea name="goal" rows="4" placeholder="Ex : centraliser les demandes, présenter une activité, éviter une double saisie..."></textarea>
+              <textarea name="goal" rows="4" placeholder="Ex : centraliser les demandes, présenter une activité, fiabiliser un import..."></textarea>
             </label>
           </section>
 
@@ -91,7 +91,7 @@ const asset = (path: string) =>
               <span>02</span>
               <div>
                 <p class="eyebrow">Complexité</p>
-                <h2>Quelles briques sont nécessaires ?</h2>
+                <h2>Quelles briques métier sont nécessaires ?</h2>
               </div>
             </div>
             <div class="option-grid">
@@ -111,7 +111,7 @@ const asset = (path: string) =>
               <span>03</span>
               <div>
                 <p class="eyebrow">Contexte</p>
-                <h2>Le projet est-il prêt à être cadré ?</h2>
+                <h2>Le contexte permet-il d'estimer correctement ?</h2>
               </div>
             </div>
             <div class="field-grid">
@@ -138,8 +138,8 @@ const asset = (path: string) =>
                 Clarté du besoin
                 <select name="clarity">
                   <option value="Assez clair" data-score="0">Assez clair</option>
-                  <option value="Quelques zones floues" data-score="2">Quelques zones floues</option>
-                  <option value="Très flou" data-score="4">Très flou</option>
+                  <option value="Quelques zones à clarifier" data-score="2">Quelques zones à clarifier</option>
+                  <option value="Encore trop mouvant" data-score="4">Encore trop mouvant</option>
                 </select>
               </label>
               <label class="field">
@@ -158,7 +158,7 @@ const asset = (path: string) =>
               <span>04</span>
               <div>
                 <p class="eyebrow">Précisions</p>
-                <h2>Ajoutez le contexte utile.</h2>
+                <h2>Ajoutez les éléments qui changent l'estimation.</h2>
               </div>
             </div>
             <div class="field-grid">
@@ -180,7 +180,7 @@ const asset = (path: string) =>
 
         <aside id="resultat" class="result-dock">
           <div class="result-panel">
-            <p class="eyebrow">Résultat live</p>
+            <p class="eyebrow">Synthèse en direct</p>
             <h2 id="complexity-title">Complexité simple</h2>
             <p id="complexity-text">Remplissez le formulaire pour obtenir une synthèse.</p>
             <p class="score-detail" id="score-detail">Score indicatif : 0/0</p>

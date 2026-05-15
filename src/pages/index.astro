@@ -28,48 +28,67 @@ const mailHref = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubjec
 
 const useCases = [
   {
-    title: "Site utile",
-    text: "Une présence web claire pour présenter une activité, rassurer et faciliter la prise de contact.",
+    title: "Site ou espace utile",
+    text: "Une présence web claire, mais pensée autour d'un objectif concret : informer, qualifier, rassurer ou déclencher une prise de contact.",
   },
   {
-    title: "Outil métier léger",
+    title: "Outil métier ciblé",
     text: "Un formulaire avancé, un tableau de suivi, un mini back-office ou un flux simple pour réduire les tâches répétitives.",
   },
   {
     title: "Cadrage technique",
-    text: "Un besoin flou transformé en périmètre, priorités, risques, questions et première estimation réaliste.",
+    text: "Une demande encore mouvante transformée en périmètre, priorités, risques, questions et première estimation réaliste.",
   },
 ];
 
 const strengths = [
   "Environ 9 ans d'expérience professionnelle en développement web PHP.",
-  "Habitude des environnements métier, des personnalisations client et des contraintes de maintenance.",
-  "Analyse de specs, chiffrage, conception technique, debug, tests, commits, revues et suivi de tickets.",
-  "Approche lead dev : clarifier, prioriser, découper, sécuriser la qualité et rester pragmatique.",
-  "Utilisation raisonnée de l'IA en assistant de développement pour accélérer l'analyse et les workflows.",
+  "Habitude des environnements métier, des personnalisations client, des données et des contraintes de maintenance.",
+  "Analyse de specs, chiffrage, conception technique, debug, tests, commits, revues et suivi de tickets/projets.",
+  "Approche lead dev : découper une demande, rendre les risques visibles, arbitrer et sécuriser la qualité.",
+  "Utilisation de l'IA comme accélérateur d'analyse et de développement, avec relecture technique systématique.",
 ];
 
 const goodFit = [
-  "Besoin utile, court ou découpable.",
-  "Référent disponible pour valider les décisions.",
-  "Périmètre écrit avant démarrage.",
-  "Retours regroupés plutôt que micro-demandes permanentes.",
+  "Problème métier réel, utile et découpable.",
+  "Référent disponible pour arbitrer les décisions.",
+  "Périmètre écrit avant le démarrage.",
+  "Retours regroupés plutôt que demandes au fil de l'eau.",
   "Projet compatible avec une disponibilité soir/week-end.",
 ];
 
 const badFit = [
-  "Urgence permanente ou support quotidien.",
-  "Gros e-commerce, marketplace ou SaaS complet.",
-  "Projet sans périmètre, sans référent ou sans objectif clair.",
-  "Budget très bas avec attentes élevées.",
-  "Maintenance ouverte sans cadre.",
+  "Urgence permanente ou support quotidien attendu.",
+  "Gros e-commerce, marketplace ou plateforme SaaS complète.",
+  "Projet sans périmètre, sans référent ou sans objectif mesurable.",
+  "Budget très bas avec attentes de produit complet.",
+  "Maintenance ouverte sans règles de fonctionnement.",
 ];
 
 const operatingFrame = [
   "Interventions courtes, cadrées et compatibles avec une disponibilité soir/week-end.",
   "Pas d'urgence permanente : les délais doivent rester réalistes.",
   "Retours regroupés pour éviter les micro-allers-retours.",
-  "Une V1 utile vaut mieux qu'un grand projet flou.",
+  "Une V1 utile vaut mieux qu'un grand périmètre instable.",
+];
+
+const businessProblems = [
+  {
+    title: "Données et imports",
+    text: "Contrôler des fichiers, éviter les doubles saisies, afficher des erreurs lisibles et garder une trace exploitable.",
+  },
+  {
+    title: "Suivi et validation",
+    text: "Remplacer les échanges dispersés par des statuts, rôles, commentaires, historiques et actions claires.",
+  },
+  {
+    title: "Écrans métier",
+    text: "Rendre un écran plus rapide, plus lisible, mieux filtré et plus adapté aux décisions quotidiennes.",
+  },
+  {
+    title: "Automatisations sobres",
+    text: "Générer un document, préparer un export, synchroniser une information ou fiabiliser une tâche répétitive.",
+  },
 ];
 
 const deliverableExamples = [
@@ -145,7 +164,7 @@ const caseStudy = {
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Quentin Vial-Gouteyron, développeur web PHP à Valence, aide les petites structures à cadrer et construire des sites utiles, outils métier légers et automatisations simples."
+      content="Quentin Vial-Gouteyron, développeur web PHP à Valence, aide les TPE, PME et équipes métier à cadrer, construire ou améliorer des outils web utiles et maintenables."
     />
     <meta name="generator" content={Astro.generator} />
     <title>Quentin Vial-Gouteyron - Développeur PHP, sites utiles et outils métier</title>
@@ -169,18 +188,18 @@ const caseStudy = {
       <section class="hero section-pad">
         <div class="hero-copy">
           <p class="eyebrow">Valence, Drôme, Ardèche et France à distance</p>
-          <h1>Des sites utiles et outils métier simples, cadrés avec une rigueur de lead dev.</h1>
+          <h1>Je transforme vos besoins métier en outils web simples et maintenables.</h1>
           <p class="lead">
-            J'aide les petites structures à transformer un besoin flou en site, mini outil web ou automatisation légère,
-            sans complexité inutile ni promesse impossible à tenir.
+            J'aide les TPE, PME et équipes métier à clarifier, construire ou améliorer un site utile, un mini outil web
+            ou une automatisation légère, sans complexité inutile.
           </p>
           <div class="hero-actions">
             <a class="button primary" href={briefHref}>Préparer mon brief</a>
             <a class="button secondary" href={mailHref}>Me contacter</a>
           </div>
           <p class="small-note">
-            Je prends peu de projets, mais je les cadre sérieusement. L'objectif est de livrer quelque chose d'utile,
-            maintenable et adapté à votre contexte.
+            Mon intérêt n'est pas de vendre un site de plus, mais de construire le bon petit outil quand il apporte
+            vraiment quelque chose.
           </p>
         </div>
 
@@ -221,14 +240,33 @@ const caseStudy = {
       <section id="approche" class="section-pad intro-section">
         <div class="section-heading">
           <p class="eyebrow">Positionnement</p>
-          <h2>Pas seulement un site vitrine. Un besoin utile, clarifié et construit proprement.</h2>
+          <h2>Pas seulement un site vitrine. Un problème métier compris, réduit et construit proprement.</h2>
           <p>
-            Un site simple peut être pertinent. Mais ma vraie valeur est de comprendre le besoin métier, poser les limites,
-            repérer les risques et construire une solution sobre qui reste maintenable.
+            Un site simple peut être pertinent. Ma vraie valeur est de comprendre le fonctionnement métier, poser les
+            limites, repérer les risques et construire une solution sobre qui reste maintenable.
           </p>
         </div>
         <div class="card-grid three">
           {useCases.map((item) => (
+            <article class="card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section-pad">
+        <div class="section-heading">
+          <p class="eyebrow">Problèmes traités</p>
+          <h2>Des cas concrets où un petit outil bien pensé peut changer le quotidien.</h2>
+          <p>
+            Je suis plus utile quand il faut relier le besoin, les données, les usages et la maintenance. Pas seulement
+            poser une interface sur une idée.
+          </p>
+        </div>
+        <div class="card-grid four">
+          {businessProblems.map((item) => (
             <article class="card">
               <h3>{item.title}</h3>
               <p>{item.text}</p>
@@ -242,7 +280,7 @@ const caseStudy = {
           <p class="eyebrow">Démo interactive</p>
           <h2>Essayez l'assistant de cadrage.</h2>
           <p>
-            Cette mini app pose les premières questions utiles, estime la complexité, détecte les points flous
+            Cette mini app pose les premières questions utiles, estime la complexité, détecte les zones à clarifier
             et génère un résumé prêt à envoyer. Elle montre la méthode autant que le code.
           </p>
         </div>
@@ -275,13 +313,13 @@ const caseStudy = {
       <section class="section-pad strength-section">
         <div class="section-heading narrow">
           <p class="eyebrow">Ce que j'apporte</p>
-          <h2>Une approche de lead dev appliquée à des projets raisonnables.</h2>
+          <h2>Une approche de lead dev appliquée à des projets courts, utiles et maintenables.</h2>
         </div>
         <div class="profile-strip">
           <span><strong>9 ans</strong> web métier</span>
           <span><strong>PHP</strong> backend</span>
           <span><strong>Lead</strong> cadrage</span>
-          <span><strong>IA</strong> workflows</span>
+          <span><strong>IA</strong> assistée</span>
         </div>
         <div class="strength-list">
           {strengths.map((item) => (
@@ -296,14 +334,14 @@ const caseStudy = {
       <section id="cadre" class="section-pad fit-section">
         <div class="fit-card good">
           <p class="eyebrow">Bon cadre</p>
-          <h2>Ce que je recherche.</h2>
+          <h2>Le cadre dans lequel je peux vraiment apporter de la valeur.</h2>
           <ul>
             {goodFit.map((item) => <li>{item}</li>)}
           </ul>
         </div>
         <div class="fit-card careful">
-          <p class="eyebrow">À éviter</p>
-          <h2>Ce que je ne veux pas vendre.</h2>
+          <p class="eyebrow">Formats peu adaptés</p>
+          <h2>Ce qui met le projet à risque.</h2>
           <ul>
             {badFit.map((item) => <li>{item}</li>)}
           </ul>
@@ -313,10 +351,10 @@ const caseStudy = {
       <section class="section-pad frame-section">
         <div class="section-heading">
           <p class="eyebrow">Cadre d'intervention</p>
-          <h2>Une disponibilité assumée, donc des projets mieux filtrés.</h2>
+          <h2>Une disponibilité assumée, donc un cadre de travail clair.</h2>
           <p>
-            Je ne cherche pas à prendre tout ce qui passe. Le bon format est un projet utile, limité, avec des décisions
-            claires et un rythme compatible avec une activité complémentaire.
+            Je prends peu de projets en parallèle. Le bon format est un projet utile, limité, avec des décisions claires
+            et un rythme compatible avec une activité complémentaire.
           </p>
         </div>
         <div class="card-grid four">
@@ -331,10 +369,10 @@ const caseStudy = {
       <section class="section-pad process-section">
         <div class="section-heading">
           <p class="eyebrow">Méthode</p>
-          <h2>Un déroulé court pour limiter la charge mentale.</h2>
+          <h2>Un déroulé court pour passer d'une demande à une version livrable.</h2>
           <p>
-            La méthode complète est volontairement simple : clarifier, découper, livrer une V1, puis décider si la suite
-            mérite vraiment d'être construite.
+            La méthode complète est volontairement simple : comprendre le besoin, découper une V1, livrer quelque chose
+            d'utilisable, puis décider si la suite mérite vraiment d'être construite.
           </p>
         </div>
         <div class="timeline-grid">
@@ -357,7 +395,7 @@ const caseStudy = {
           <h2>Des sorties utiles avant même de coder.</h2>
           <p>
             Un bon petit projet commence souvent par une meilleure formulation du besoin. Ces livrables évitent les devis
-            flous et les développements qui changent de forme en route.
+            vagues et les développements qui changent de forme en route.
           </p>
         </div>
         <div class="card-grid four">

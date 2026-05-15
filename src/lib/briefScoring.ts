@@ -66,7 +66,9 @@ const budgetScores: Record<string, number> = {
 
 const clarityScores: Record<string, number> = {
   "Assez clair": 0,
+  "Quelques zones à clarifier": 2,
   "Quelques zones floues": 2,
+  "Encore trop mouvant": 4,
   "Très flou": 4,
 };
 
@@ -134,7 +136,7 @@ const buildRisks = (data: BriefData, score: number) => {
     risks.push("Budget non défini : difficile d'arbitrer les priorités.");
   }
   if (data.clarity !== "Assez clair") {
-    risks.push("Besoin encore flou : un cadrage court est nécessaire avant de développer.");
+    risks.push("Demande encore à clarifier : un cadrage court est nécessaire avant de développer.");
   }
   if (data.contentReady === "Pas prêts") {
     risks.push("Contenus ou données pas prêts : risque de blocage ou d'allers-retours.");
@@ -219,7 +221,7 @@ const buildOutOfScope = (data: BriefData) => {
     out.push("Intégration complète tant que l'accès aux données n'est pas validé");
   }
   if (data.clarity !== "Assez clair") {
-    out.push("Développement complet avant clarification du besoin");
+    out.push("Développement complet avant clarification du périmètre");
   }
   if (data.deadline === "Urgent") {
     out.push("Fonctionnalités confort incompatibles avec l'urgence");

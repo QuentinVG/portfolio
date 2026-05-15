@@ -35,6 +35,9 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - [x] Transformer `/brief` en vraie interface d'app avec navigation d'étapes, progression et résultat live.
 - [x] Harmoniser les pages `/`, `/brief` et `/method` avec une palette plus professionnelle, des états focus/hover et des cartes plus lisibles.
 - [x] Ajuster les titres mobile après contrôle visuel pour garder un rendu sérieux.
+- [x] Reprendre les textes pour renforcer la valeur métier, réduire le ton défensif et franciser l'assistant.
+- [x] Ajouter une section de problèmes métier concrets : données, suivi, écrans métier, automatisations.
+- [x] Mettre à jour le scoring après renommage des choix de clarté, avec compatibilité pour les anciennes valeurs locales.
 
 ## Dernière vérification
 
@@ -65,7 +68,7 @@ Développeur web PHP orienté outils métier, sites utiles et automatisations l�
 
 ### Promesse
 
-J'aide les petites structures à transformer un besoin flou en site, outil web ou automatisation simple, cadré, maintenable et utile.
+J'aide les TPE, PME et équipes métier à transformer un besoin métier en outil web simple, utile, cadré et maintenable.
 
 ### À éviter
 
@@ -93,7 +96,7 @@ Le site vitrine peut rester une offre possible, mais ne doit pas être le coeur 
 
 ### Exemple d'angle
 
-> Développeur PHP à Valence, j'aide les petites structures à clarifier et construire des sites utiles, outils web et automatisations simples, sans complexité inutile.
+> Développeur PHP à Valence, j'aide les TPE, PME et équipes métier à clarifier, construire ou améliorer des outils web utiles, sans complexité inutile.
 
 ## Étape 2 - Simplifier les offres
 
@@ -112,7 +115,7 @@ Clarifier et construire un petit outil web ou site utile, bien cadré, sans comp
 - Trop d'offres au même niveau.
 - Prix d'appel trop bas.
 - Promesse de disponibilité permanente.
-- Projets trop larges ou trop flous.
+- Projets trop larges ou trop instables.
 
 ## Étape 3 - Ajouter des garde-fous commerciaux
 
@@ -142,7 +145,7 @@ Créer une section claire sur le bon cadre de collaboration.
 ### Nom possible
 
 - Assistant de cadrage
-- Brief Builder
+- Assistant de cadrage
 - Estimateur de projet
 - Cadrage Express
 
@@ -205,7 +208,7 @@ L'app doit rester simple et finie.
 
 ### Message à faire passer
 
-Cette app montre la capacité à transformer un besoin flou en cadrage exploitable.
+Cette app montre la capacité à transformer une demande métier en cadrage exploitable.
 
 ## Étape 6 - Ajouter des cas anonymisés
 

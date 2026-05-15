@@ -9,7 +9,7 @@ const steps = [
   {
     title: "Comprendre le besoin réel",
     text: "Identifier l'objectif, les utilisateurs, les données manipulées, les contraintes et ce qui bloque aujourd'hui.",
-    output: "Une synthèse courte du contexte et du résultat attendu.",
+    output: "Une synthèse courte du contexte, du problème et du résultat attendu.",
   },
   {
     title: "Réduire le périmètre",
@@ -34,11 +34,18 @@ const steps = [
 ];
 
 const principles = [
-  "Un besoin flou ne doit pas entrer directement en développement.",
+  "Une demande encore mouvante ne doit pas entrer directement en développement.",
   "Une V1 courte réduit les risques mieux qu'un gros devis global.",
   "Les contraintes de temps doivent être visibles dès le départ.",
   "Le code doit rester proportionné à l'enjeu du projet.",
   "L'IA peut accélérer l'analyse, mais elle ne remplace pas la responsabilité technique.",
+];
+
+const checks = [
+  "Quelles données entrent, sortent ou doivent être conservées ?",
+  "Qui peut voir, modifier, valider ou exporter l'information ?",
+  "Quelles règles métier doivent être explicites dès la V1 ?",
+  "Quelles dépendances peuvent bloquer le délai ou l'estimation ?",
 ];
 ---
 
@@ -50,7 +57,7 @@ const principles = [
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Méthode de cadrage de Quentin Vial-Gouteyron pour petits projets web, outils métier et automatisations simples."
+      content="Méthode de cadrage de Quentin Vial-Gouteyron pour projets web métier, outils internes et automatisations simples."
     />
     <title>Méthode - Quentin Vial-Gouteyron</title>
   </head>
@@ -72,8 +79,8 @@ const principles = [
           <p class="eyebrow">Méthode</p>
           <h1>Clarifier avant de coder.</h1>
           <p class="lead">
-            Mon approche est volontairement simple : comprendre, réduire, estimer, construire, puis décider la suite.
-            C'est ce qui permet de garder un petit projet utile sans le transformer en chantier permanent.
+            Mon approche est volontairement simple : comprendre le métier, réduire le périmètre, estimer avec prudence,
+            construire proprement, puis décider la suite.
           </p>
           <div class="actions">
             <a class="button primary" href={briefHref}>Tester l'assistant</a>
@@ -84,7 +91,7 @@ const principles = [
           <strong>Cadre assumé</strong>
           <p>
             Je privilégie les projets courts, les retours regroupés, les délais réalistes et les périmètres écrits.
-            C'est moins spectaculaire qu'une grosse promesse, mais plus fiable.
+            C'est le cadre qui permet de livrer sans transformer une V1 en chantier permanent.
           </p>
         </aside>
       </section>
@@ -92,7 +99,7 @@ const principles = [
       <section class="section-pad">
         <div class="section-heading">
           <p class="eyebrow">Déroulé</p>
-          <h2>Les étapes qui évitent la dérive.</h2>
+          <h2>Les étapes qui transforment une demande en version livrable.</h2>
         </div>
         <div class="step-list">
           {steps.map((step, index) => (
@@ -122,13 +129,27 @@ const principles = [
         </div>
       </section>
 
+      <section class="section-pad">
+        <div class="section-heading">
+          <p class="eyebrow">Réflexes lead dev</p>
+          <h2>Les questions techniques que je veux rendre visibles tôt.</h2>
+        </div>
+        <div class="principle-grid">
+          {checks.map((item) => (
+            <article>
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section class="contact-section">
         <div>
           <p class="eyebrow">Point de départ</p>
           <h2>Le brief reste le meilleur premier filtre.</h2>
           <p>
             Un bon brief ne remplace pas un échange, mais il permet déjà de voir si le projet est raisonnable,
-            trop flou ou à découper.
+            encore trop mouvant ou à découper.
           </p>
         </div>
         <div class="contact-actions">
