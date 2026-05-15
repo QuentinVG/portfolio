@@ -30,53 +30,73 @@ export type BriefResult = {
   summary: string;
 };
 
-const projectTypeScores: Record<string, number> = {
-  "Site clair": 1,
-  "Outil métier léger": 3,
-  Automatisation: 3,
-  Refonte: 2,
-  "Formulaire avancé": 2,
+export type BriefOption = {
+  label: string;
+  score: number;
+  legacyLabels?: string[];
 };
 
-const featureScores: Record<string, number> = {
-  "Espace admin": 2,
-  "Droits utilisateurs": 3,
-  "Import / export": 2,
-  "Notifications email": 1,
-  "Connexion à un outil existant": 3,
-  "Historique ou journal": 2,
-  Paiement: 4,
-  "Documents générés": 2,
-};
+export const projectTypeOptions = [
+  { label: "Site clair", score: 1 },
+  { label: "Outil métier léger", score: 3 },
+  { label: "Automatisation", score: 3 },
+  { label: "Refonte", score: 2 },
+  { label: "Formulaire avancé", score: 2 },
+] satisfies BriefOption[];
 
-const deadlineScores: Record<string, number> = {
-  Flexible: 0,
-  "1 à 2 mois": 1,
-  "Moins d'un mois": 3,
-  Urgent: 5,
-};
+export const featureOptions = [
+  { label: "Espace admin", score: 2 },
+  { label: "Droits utilisateurs", score: 3 },
+  { label: "Import / export", score: 2 },
+  { label: "Notifications email", score: 1 },
+  { label: "Connexion à un outil existant", score: 3, displayLabel: "Connexion outil existant" },
+  { label: "Historique ou journal", score: 2 },
+  { label: "Paiement", score: 4 },
+  { label: "Documents générés", score: 2 },
+] satisfies Array<BriefOption & { displayLabel?: string }>;
 
-const budgetScores: Record<string, number> = {
-  "Non défini": 2,
-  "Moins de 500 EUR": 3,
-  "500 à 1500 EUR": 1,
-  "1500 à 3000 EUR": 0,
-  "Plus de 3000 EUR": 0,
-};
+export const deadlineOptions = [
+  { label: "Flexible", score: 0 },
+  { label: "1 à 2 mois", score: 1 },
+  { label: "Moins d'un mois", score: 3 },
+  { label: "Urgent", score: 5 },
+] satisfies BriefOption[];
 
-const clarityScores: Record<string, number> = {
-  "Assez clair": 0,
-  "Quelques zones à clarifier": 2,
-  "Quelques zones floues": 2,
-  "Encore trop mouvant": 4,
-  "Très flou": 4,
-};
+export const budgetOptions = [
+  { label: "Non défini", score: 2 },
+  { label: "Moins de 500 EUR", score: 3 },
+  { label: "500 à 1500 EUR", score: 1 },
+  { label: "1500 à 3000 EUR", score: 0 },
+  { label: "Plus de 3000 EUR", score: 0 },
+] satisfies BriefOption[];
 
-const contentScores: Record<string, number> = {
-  "Déjà prêts": 0,
-  "Partiellement prêts": 1,
-  "Pas prêts": 3,
-};
+export const clarityOptions = [
+  { label: "Assez clair", score: 0 },
+  { label: "Quelques zones à clarifier", score: 2, legacyLabels: ["Quelques zones floues"] },
+  { label: "Encore trop mouvant", score: 4, legacyLabels: ["Très flou"] },
+] satisfies BriefOption[];
+
+export const contentOptions = [
+  { label: "Déjà prêts", score: 0 },
+  { label: "Partiellement prêts", score: 1 },
+  { label: "Pas prêts", score: 3 },
+] satisfies BriefOption[];
+
+const toScoreMap = (options: readonly BriefOption[]) =>
+  options.reduce<Record<string, number>>((map, option) => {
+    map[option.label] = option.score;
+    option.legacyLabels?.forEach((label) => {
+      map[label] = option.score;
+    });
+    return map;
+  }, {});
+
+const projectTypeScores = toScoreMap(projectTypeOptions);
+const featureScores = toScoreMap(featureOptions);
+const deadlineScores = toScoreMap(deadlineOptions);
+const budgetScores = toScoreMap(budgetOptions);
+const clarityScores = toScoreMap(clarityOptions);
+const contentScores = toScoreMap(contentOptions);
 
 const maxScore =
   Math.max(...Object.values(projectTypeScores)) +

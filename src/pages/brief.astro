@@ -1,7 +1,20 @@
 ---
-const contactEmail = "vialgouteyron@gmail.com";
-const asset = (path: string) =>
-  `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+import SiteHeader from "../components/SiteHeader.astro";
+import {
+  budgetOptions,
+  clarityOptions,
+  contentOptions,
+  deadlineOptions,
+  featureOptions,
+  projectTypeOptions,
+} from "../lib/briefScoring";
+import { asset as buildAsset, contactEmail } from "../lib/site";
+
+const asset = (path: string) => buildAsset(import.meta.env.BASE_URL, path);
+const navItems = [
+  { href: asset(""), label: "Portfolio" },
+  { href: "#resultat", label: "Résultat", cta: true },
+];
 ---
 
 <html lang="fr">
@@ -17,16 +30,7 @@ const asset = (path: string) =>
     <title>Assistant de cadrage - Quentin Vial-Gouteyron</title>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href={asset("")}>
-        <span>Quentin Vial-Gouteyron</span>
-        <small>Assistant de cadrage</small>
-      </a>
-      <nav>
-        <a href={asset("")}>Portfolio</a>
-        <a class="nav-cta" href="#resultat">Résultat</a>
-      </nav>
-    </header>
+    <SiteHeader subtitle="Assistant de cadrage" navItems={navItems} />
 
     <main>
       <section class="hero section-pad">
@@ -47,7 +51,7 @@ const asset = (path: string) =>
         </aside>
       </section>
 
-      <form id="brief-form" class="brief-shell section-pad">
+      <form id="brief-form" class="brief-shell section-pad" data-contact-email={contactEmail}>
         <aside class="app-sidebar">
           <div class="progress-panel" aria-live="polite">
             <strong id="progress-label">Progression : 0/4</strong>
@@ -74,11 +78,18 @@ const asset = (path: string) =>
               </div>
             </div>
             <div class="option-grid">
-              <label><input type="radio" name="projectType" value="Site clair" data-score="1" checked /> <span>Site clair</span></label>
-              <label><input type="radio" name="projectType" value="Outil métier léger" data-score="3" /> <span>Outil métier léger</span></label>
-              <label><input type="radio" name="projectType" value="Automatisation" data-score="3" /> <span>Automatisation</span></label>
-              <label><input type="radio" name="projectType" value="Refonte" data-score="2" /> <span>Refonte</span></label>
-              <label><input type="radio" name="projectType" value="Formulaire avancé" data-score="2" /> <span>Formulaire avancé</span></label>
+              {projectTypeOptions.map((option, index) => (
+                <label>
+                  <input
+                    type="radio"
+                    name="projectType"
+                    value={option.label}
+                    data-score={option.score}
+                    checked={index === 0}
+                  />
+                  <span>{option.label}</span>
+                </label>
+              ))}
             </div>
             <label class="field">
               Objectif principal
@@ -95,14 +106,12 @@ const asset = (path: string) =>
               </div>
             </div>
             <div class="option-grid">
-              <label><input type="checkbox" name="features" value="Espace admin" data-score="2" /> <span>Espace admin</span></label>
-              <label><input type="checkbox" name="features" value="Droits utilisateurs" data-score="3" /> <span>Droits utilisateurs</span></label>
-              <label><input type="checkbox" name="features" value="Import / export" data-score="2" /> <span>Import / export</span></label>
-              <label><input type="checkbox" name="features" value="Notifications email" data-score="1" /> <span>Notifications email</span></label>
-              <label><input type="checkbox" name="features" value="Connexion à un outil existant" data-score="3" /> <span>Connexion outil existant</span></label>
-              <label><input type="checkbox" name="features" value="Historique ou journal" data-score="2" /> <span>Historique ou journal</span></label>
-              <label><input type="checkbox" name="features" value="Paiement" data-score="4" /> <span>Paiement</span></label>
-              <label><input type="checkbox" name="features" value="Documents générés" data-score="2" /> <span>Documents générés</span></label>
+              {featureOptions.map((option) => (
+                <label>
+                  <input type="checkbox" name="features" value={option.label} data-score={option.score} />
+                  <span>{option.displayLabel ?? option.label}</span>
+                </label>
+              ))}
             </div>
           </section>
 
@@ -118,36 +127,33 @@ const asset = (path: string) =>
               <label class="field">
                 Délai souhaité
                 <select name="deadline">
-                  <option value="Flexible" data-score="0">Flexible</option>
-                  <option value="1 à 2 mois" data-score="1">1 à 2 mois</option>
-                  <option value="Moins d'un mois" data-score="3">Moins d'un mois</option>
-                  <option value="Urgent" data-score="5">Urgent</option>
+                  {deadlineOptions.map((option) => (
+                    <option value={option.label} data-score={option.score}>{option.label}</option>
+                  ))}
                 </select>
               </label>
               <label class="field">
                 Budget approximatif
                 <select name="budget">
-                  <option value="Non défini" data-score="2">Non défini</option>
-                  <option value="Moins de 500 EUR" data-score="3">Moins de 500 EUR</option>
-                  <option value="500 à 1500 EUR" data-score="1">500 à 1500 EUR</option>
-                  <option value="1500 à 3000 EUR" data-score="0">1500 à 3000 EUR</option>
-                  <option value="Plus de 3000 EUR" data-score="0">Plus de 3000 EUR</option>
+                  {budgetOptions.map((option) => (
+                    <option value={option.label} data-score={option.score}>{option.label}</option>
+                  ))}
                 </select>
               </label>
               <label class="field">
                 Clarté du besoin
                 <select name="clarity">
-                  <option value="Assez clair" data-score="0">Assez clair</option>
-                  <option value="Quelques zones à clarifier" data-score="2">Quelques zones à clarifier</option>
-                  <option value="Encore trop mouvant" data-score="4">Encore trop mouvant</option>
+                  {clarityOptions.map((option) => (
+                    <option value={option.label} data-score={option.score}>{option.label}</option>
+                  ))}
                 </select>
               </label>
               <label class="field">
                 Contenus ou données
                 <select name="contentReady">
-                  <option value="Déjà prêts" data-score="0">Déjà prêts</option>
-                  <option value="Partiellement prêts" data-score="1">Partiellement prêts</option>
-                  <option value="Pas prêts" data-score="3">Pas prêts</option>
+                  {contentOptions.map((option) => (
+                    <option value={option.label} data-score={option.score}>{option.label}</option>
+                  ))}
                 </select>
               </label>
             </div>
@@ -245,7 +251,7 @@ const asset = (path: string) =>
       const progressFill = document.querySelector("#progress-fill");
       const resetButton = document.querySelector("#reset-brief");
       const storageKey = "qvg-brief-builder";
-      const contactEmail = "vialgouteyron@gmail.com";
+      const contactEmail = form.dataset.contactEmail || "";
 
       const readCheckedValues = (name) =>
         Array.from(form.querySelectorAll(`[name="${name}"]:checked`)).map((field) => field.value);
@@ -421,51 +427,12 @@ const asset = (path: string) =>
     text-decoration: none;
   }
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 16px clamp(20px, 5vw, 72px);
-    border-bottom: 1px solid rgba(216, 208, 196, 0.78);
-    background: rgba(246, 243, 237, 0.94);
-    backdrop-filter: blur(14px);
-  }
-
-  .brand {
-    display: grid;
-    gap: 2px;
-    font-weight: 900;
-  }
-
-  .brand small,
   p,
   li,
   input,
   textarea,
   select {
     color: var(--muted);
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: clamp(12px, 2.3vw, 28px);
-    color: var(--muted);
-    font-size: 0.94rem;
-    font-weight: 800;
-  }
-
-  .nav-cta {
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    padding: 8px 12px;
-    color: var(--accent-dark);
-    background: var(--soft-green);
   }
 
   .section-pad {
@@ -905,12 +872,6 @@ const asset = (path: string) =>
   }
 
   @media (max-width: 700px) {
-    .site-header {
-      position: static;
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
     .option-grid,
     .field-grid,
     .result-grid,

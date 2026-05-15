@@ -24,6 +24,12 @@ Le site sert à montrer une approche pragmatique :
 - HTML/CSS natif
 - JavaScript côté navigateur pour l'assistant de cadrage
 
+## Structure
+
+- `src/components/SiteHeader.astro` : header partagé entre les pages.
+- `src/lib/site.ts` : constantes publiques du site et helpers d'URL.
+- `src/lib/briefScoring.ts` : options de formulaire, scoring et génération de synthèse.
+
 ## Commandes
 
 ```sh

@@ -1,10 +1,14 @@
 ---
-const contactEmail = "vialgouteyron@gmail.com";
-const repoUrl = "https://github.com/QuentinVG/portfolio";
-const asset = (path: string) =>
-  `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+import SiteHeader from "../components/SiteHeader.astro";
+import { asset as buildAsset, contactEmail, repoUrl } from "../lib/site";
+
+const asset = (path: string) => buildAsset(import.meta.env.BASE_URL, path);
 
 const briefHref = asset("brief");
+const navItems = [
+  { href: asset(""), label: "Portfolio" },
+  { href: briefHref, label: "Préparer un brief", cta: true },
+];
 const steps = [
   {
     title: "Comprendre le besoin réel",
@@ -62,16 +66,7 @@ const checks = [
     <title>Méthode - Quentin Vial-Gouteyron</title>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href={asset("")}>
-        <span>Quentin Vial-Gouteyron</span>
-        <small>Méthode de cadrage</small>
-      </a>
-      <nav>
-        <a href={asset("")}>Portfolio</a>
-        <a class="nav-cta" href={briefHref}>Préparer un brief</a>
-      </nav>
-    </header>
+    <SiteHeader subtitle="Méthode de cadrage" navItems={navItems} />
 
     <main>
       <section class="hero section-pad">
@@ -204,52 +199,16 @@ const checks = [
     overflow-wrap: anywhere;
   }
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 16px clamp(20px, 5vw, 72px);
-    border-bottom: 1px solid rgba(216, 208, 196, 0.78);
-    background: rgba(246, 243, 237, 0.94);
-    backdrop-filter: blur(14px);
-  }
-
-  .brand {
-    display: grid;
-    gap: 2px;
-    font-weight: 900;
-  }
-
-  .brand small,
   p {
     color: var(--muted);
   }
 
-  nav,
   .actions,
   .contact-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
     align-items: center;
-  }
-
-  nav {
-    color: var(--muted);
-    font-size: 0.94rem;
-    font-weight: 800;
-  }
-
-  .nav-cta {
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    padding: 8px 12px;
-    color: var(--accent-dark);
-    background: var(--soft-green);
   }
 
   .section-pad {
@@ -477,12 +436,6 @@ const checks = [
   }
 
   @media (max-width: 700px) {
-    .site-header {
-      position: static;
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
     h1 {
       font-size: clamp(2.25rem, 10.8vw, 3rem);
       line-height: 1.02;

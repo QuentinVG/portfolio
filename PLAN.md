@@ -38,6 +38,11 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - [x] Reprendre les textes pour renforcer la valeur métier, réduire le ton défensif et franciser l'assistant.
 - [x] Ajouter une section de problèmes métier concrets : données, suivi, écrans métier, automatisations.
 - [x] Mettre à jour le scoring après renommage des choix de clarté, avec compatibilité pour les anciennes valeurs locales.
+- [x] Auditer la qualité du code après les passes front/contenu.
+- [x] Extraire le header commun dans `src/components/SiteHeader.astro`.
+- [x] Centraliser les constantes de site et helpers d'URL dans `src/lib/site.ts`.
+- [x] Rendre les options de l'assistant data-driven depuis `src/lib/briefScoring.ts` pour éviter la duplication formulaire/scoring.
+- [x] Supprimer le CSS de header devenu mort dans les pages.
 
 ## Dernière vérification
 
@@ -59,6 +64,7 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - La méthode est inspectable sur une page dédiée et le code est accessible depuis le portfolio.
 - Les captures locales ont été générées dans `tmp-screenshots/` et ce dossier est ignoré par Git.
 - Le front a été renforcé : hero plus démonstratif, assistant présenté comme produit, layout `/brief` plus applicatif, responsive resserré.
+- La dette DRY principale a été réduite : header factorisé, constantes centralisées, options de formulaire partagées avec la logique de scoring.
 
 ## Positionnement recommandé
 

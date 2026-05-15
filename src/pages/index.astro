@@ -1,15 +1,20 @@
 ---
-const contactEmail = "vialgouteyron@gmail.com";
-const githubUrl = "https://github.com/QuentinVG";
-const linkedinUrl = "https://www.linkedin.com/in/qvg/";
-const repoUrl = "https://github.com/QuentinVG/portfolio";
+import SiteHeader from "../components/SiteHeader.astro";
+import { asset as buildAsset, contactEmail, githubUrl, linkedinUrl, mailto, repoUrl } from "../lib/site";
+
 const briefSourceUrl = `${repoUrl}/blob/main/src/pages/brief.astro`;
 const scoringSourceUrl = `${repoUrl}/blob/main/src/lib/briefScoring.ts`;
-const asset = (path: string) =>
-  `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+const asset = (path: string) => buildAsset(import.meta.env.BASE_URL, path);
 
 const briefHref = asset("brief");
 const methodHref = asset("method");
+const navItems = [
+  { href: "#approche", label: "Approche" },
+  { href: methodHref, label: "Méthode" },
+  { href: "#cadre", label: "Cadre" },
+  { href: "#exemples", label: "Exemples" },
+  { href: briefHref, label: "Préparer un brief", cta: true },
+];
 const mailSubject = "Demande de cadrage pour un projet web";
 const mailBody = `Bonjour Quentin,
 
@@ -24,7 +29,7 @@ Budget approximatif :
 Ce qui est déjà prêt :
 
 Merci,`;
-const mailHref = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+const mailHref = mailto(mailSubject, mailBody);
 
 const useCases = [
   {
@@ -170,19 +175,7 @@ const caseStudy = {
     <title>Quentin Vial-Gouteyron - Développeur PHP, sites utiles et outils métier</title>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Retour accueil">
-        <span>Quentin Vial-Gouteyron</span>
-        <small>Développeur PHP à Valence</small>
-      </a>
-      <nav aria-label="Navigation principale">
-        <a href="#approche">Approche</a>
-        <a href={methodHref}>Méthode</a>
-        <a href="#cadre">Cadre</a>
-        <a href="#exemples">Exemples</a>
-        <a class="nav-cta" href={briefHref}>Préparer un brief</a>
-      </nav>
-    </header>
+    <SiteHeader subtitle="Développeur PHP à Valence" brandHref="#top" navItems={navItems} />
 
     <main id="top">
       <section class="hero section-pad">
@@ -520,48 +513,9 @@ const caseStudy = {
     text-decoration: none;
   }
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 16px clamp(20px, 5vw, 72px);
-    border-bottom: 1px solid rgba(216, 208, 196, 0.78);
-    background: rgba(246, 243, 237, 0.94);
-    backdrop-filter: blur(14px);
-  }
-
-  .brand {
-    display: grid;
-    gap: 2px;
-    font-weight: 900;
-  }
-
-  .brand small,
   p,
   li {
     color: var(--muted);
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: clamp(12px, 2.3vw, 28px);
-    color: var(--muted);
-    font-size: 0.94rem;
-    font-weight: 800;
-  }
-
-  .nav-cta {
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    padding: 8px 12px;
-    color: var(--accent-dark);
-    background: var(--soft-green);
   }
 
   .section-pad {
@@ -1216,16 +1170,6 @@ const caseStudy = {
   }
 
   @media (max-width: 700px) {
-    .site-header {
-      position: static;
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    nav {
-      width: 100%;
-    }
-
     .hero {
       min-height: auto;
       padding-top: 46px;
