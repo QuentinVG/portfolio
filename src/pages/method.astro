@@ -143,16 +143,18 @@ const principles = [
 <style>
   :root {
     color-scheme: light;
-    --bg: #f6f3ed;
-    --bg-soft: #ece6dc;
+    --bg: #f7f6f2;
+    --bg-soft: #eef1ee;
     --surface: #ffffff;
     --ink: #202124;
-    --muted: #66615b;
-    --line: #d8d0c4;
-    --accent: #3f6f62;
-    --accent-dark: #28483f;
+    --muted: #62645f;
+    --line: #d6ddd6;
+    --accent: #326c60;
+    --accent-dark: #1f493f;
+    --cool: #415b66;
     --soft-green: #edf5f1;
     --shadow: 0 20px 54px rgba(32, 33, 36, 0.1);
+    --shadow-strong: 0 28px 80px rgba(31, 73, 63, 0.16);
     --radius: 8px;
     --page: 1160px;
   }
@@ -291,6 +293,20 @@ const principles = [
     border-radius: var(--radius);
     padding: 13px 18px;
     font-weight: 900;
+    transition:
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(32, 33, 36, 0.08);
+  }
+
+  .button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid rgba(50, 108, 96, 0.28);
+    outline-offset: 3px;
   }
 
   .button.primary {
@@ -314,7 +330,10 @@ const principles = [
 
   .side-note {
     padding: 24px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-strong);
+    background:
+      linear-gradient(135deg, rgba(237, 245, 241, 0.88), rgba(255, 255, 255, 0) 42%),
+      var(--surface);
   }
 
   .side-note p,
@@ -332,6 +351,7 @@ const principles = [
   .step-list {
     display: grid;
     gap: 14px;
+    position: relative;
   }
 
   .step-list article {
@@ -339,6 +359,17 @@ const principles = [
     grid-template-columns: 80px minmax(0, 1fr);
     gap: 20px;
     padding: 24px;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .step-list article:hover,
+  .principle-grid article:hover {
+    border-color: rgba(50, 108, 96, 0.38);
+    box-shadow: 0 14px 34px rgba(32, 33, 36, 0.08);
+    transform: translateY(-2px);
   }
 
   .step-list span {
@@ -364,6 +395,10 @@ const principles = [
 
   .principle-grid article {
     padding: 22px;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
   }
 
   .principle-grid p {
@@ -428,7 +463,8 @@ const principles = [
     }
 
     h1 {
-      font-size: clamp(2.35rem, 12vw, 3.4rem);
+      font-size: clamp(2.25rem, 10.8vw, 3rem);
+      line-height: 1.02;
     }
 
     .actions,

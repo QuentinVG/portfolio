@@ -30,6 +30,11 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - [x] Améliorer la sortie de l'assistant : format conseillé, périmètre V1, hors périmètre.
 - [x] Vérifier visuellement les pages avec captures Playwright desktop/mobile.
 - [x] Corriger le rendu des radios/checkboxes de l'assistant détecté par capture.
+- [x] Reprendre le front pour un rendu plus premium sans basculer dans le décoratif.
+- [x] Remplacer le panneau profil du hero par un aperçu produit plus fort.
+- [x] Transformer `/brief` en vraie interface d'app avec navigation d'étapes, progression et résultat live.
+- [x] Harmoniser les pages `/`, `/brief` et `/method` avec une palette plus professionnelle, des états focus/hover et des cartes plus lisibles.
+- [x] Ajuster les titres mobile après contrôle visuel pour garder un rendu sérieux.
 
 ## Dernière vérification
 
@@ -38,6 +43,7 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - Routes locales vérifiées avec le préfixe GitHub Pages :
   - `http://127.0.0.1:4321/portfolio/`
   - `http://127.0.0.1:4321/portfolio/brief`
+  - `http://127.0.0.1:4321/portfolio/method`
 - Déploiement GitHub Pages : OK via le workflow `Deploy to GitHub Pages`.
 - Note : GitHub affiche un avertissement de dépréciation Node 20 sur une action interne liée à `actions/upload-pages-artifact@v4`. Le workflow utilise déjà Node 24 pour le build.
 
@@ -49,6 +55,7 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - La home apporte davantage de preuve produit via un aperçu de résultat et une étude de cas anonymisée.
 - La méthode est inspectable sur une page dédiée et le code est accessible depuis le portfolio.
 - Les captures locales ont été générées dans `tmp-screenshots/` et ce dossier est ignoré par Git.
+- Le front a été renforcé : hero plus démonstratif, assistant présenté comme produit, layout `/brief` plus applicatif, responsive resserré.
 
 ## Positionnement recommandé
 

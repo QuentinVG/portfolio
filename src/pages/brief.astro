@@ -47,130 +47,140 @@ const asset = (path: string) =>
         </aside>
       </section>
 
-      <form id="brief-form" class="brief-form section-pad">
-        <div class="progress-panel" aria-live="polite">
-          <div>
+      <form id="brief-form" class="brief-shell section-pad">
+        <aside class="app-sidebar">
+          <div class="progress-panel" aria-live="polite">
             <strong id="progress-label">Progression : 0/4</strong>
             <p id="progress-text">Complétez les champs utiles pour obtenir un brief exploitable.</p>
+            <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
           </div>
+          <nav class="step-nav" aria-label="Étapes du brief">
+            <a href="#besoin"><span>01</span> Besoin</a>
+            <a href="#complexite"><span>02</span> Complexité</a>
+            <a href="#contexte"><span>03</span> Contexte</a>
+            <a href="#precisions"><span>04</span> Précisions</a>
+            <a href="#resultat"><span>05</span> Résultat</a>
+          </nav>
           <button class="button secondary compact" type="button" id="reset-brief">Réinitialiser</button>
+        </aside>
+
+        <div class="brief-main">
+          <section id="besoin" class="step">
+            <div class="step-heading">
+              <span>01</span>
+              <div>
+                <p class="eyebrow">Besoin</p>
+                <h2>Quel type de projet préparez-vous ?</h2>
+              </div>
+            </div>
+            <div class="option-grid">
+              <label><input type="radio" name="projectType" value="Site clair" data-score="1" checked /> <span>Site clair</span></label>
+              <label><input type="radio" name="projectType" value="Outil métier léger" data-score="3" /> <span>Outil métier léger</span></label>
+              <label><input type="radio" name="projectType" value="Automatisation" data-score="3" /> <span>Automatisation</span></label>
+              <label><input type="radio" name="projectType" value="Refonte" data-score="2" /> <span>Refonte</span></label>
+              <label><input type="radio" name="projectType" value="Formulaire avancé" data-score="2" /> <span>Formulaire avancé</span></label>
+            </div>
+            <label class="field">
+              Objectif principal
+              <textarea name="goal" rows="4" placeholder="Ex : centraliser les demandes, présenter une activité, éviter une double saisie..."></textarea>
+            </label>
+          </section>
+
+          <section id="complexite" class="step">
+            <div class="step-heading">
+              <span>02</span>
+              <div>
+                <p class="eyebrow">Complexité</p>
+                <h2>Quelles briques sont nécessaires ?</h2>
+              </div>
+            </div>
+            <div class="option-grid">
+              <label><input type="checkbox" name="features" value="Espace admin" data-score="2" /> <span>Espace admin</span></label>
+              <label><input type="checkbox" name="features" value="Droits utilisateurs" data-score="3" /> <span>Droits utilisateurs</span></label>
+              <label><input type="checkbox" name="features" value="Import / export" data-score="2" /> <span>Import / export</span></label>
+              <label><input type="checkbox" name="features" value="Notifications email" data-score="1" /> <span>Notifications email</span></label>
+              <label><input type="checkbox" name="features" value="Connexion à un outil existant" data-score="3" /> <span>Connexion outil existant</span></label>
+              <label><input type="checkbox" name="features" value="Historique ou journal" data-score="2" /> <span>Historique ou journal</span></label>
+              <label><input type="checkbox" name="features" value="Paiement" data-score="4" /> <span>Paiement</span></label>
+              <label><input type="checkbox" name="features" value="Documents générés" data-score="2" /> <span>Documents générés</span></label>
+            </div>
+          </section>
+
+          <section id="contexte" class="step">
+            <div class="step-heading">
+              <span>03</span>
+              <div>
+                <p class="eyebrow">Contexte</p>
+                <h2>Le projet est-il prêt à être cadré ?</h2>
+              </div>
+            </div>
+            <div class="field-grid">
+              <label class="field">
+                Délai souhaité
+                <select name="deadline">
+                  <option value="Flexible" data-score="0">Flexible</option>
+                  <option value="1 à 2 mois" data-score="1">1 à 2 mois</option>
+                  <option value="Moins d'un mois" data-score="3">Moins d'un mois</option>
+                  <option value="Urgent" data-score="5">Urgent</option>
+                </select>
+              </label>
+              <label class="field">
+                Budget approximatif
+                <select name="budget">
+                  <option value="Non défini" data-score="2">Non défini</option>
+                  <option value="Moins de 500 EUR" data-score="3">Moins de 500 EUR</option>
+                  <option value="500 à 1500 EUR" data-score="1">500 à 1500 EUR</option>
+                  <option value="1500 à 3000 EUR" data-score="0">1500 à 3000 EUR</option>
+                  <option value="Plus de 3000 EUR" data-score="0">Plus de 3000 EUR</option>
+                </select>
+              </label>
+              <label class="field">
+                Clarté du besoin
+                <select name="clarity">
+                  <option value="Assez clair" data-score="0">Assez clair</option>
+                  <option value="Quelques zones floues" data-score="2">Quelques zones floues</option>
+                  <option value="Très flou" data-score="4">Très flou</option>
+                </select>
+              </label>
+              <label class="field">
+                Contenus ou données
+                <select name="contentReady">
+                  <option value="Déjà prêts" data-score="0">Déjà prêts</option>
+                  <option value="Partiellement prêts" data-score="1">Partiellement prêts</option>
+                  <option value="Pas prêts" data-score="3">Pas prêts</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <section id="precisions" class="step">
+            <div class="step-heading">
+              <span>04</span>
+              <div>
+                <p class="eyebrow">Précisions</p>
+                <h2>Ajoutez le contexte utile.</h2>
+              </div>
+            </div>
+            <div class="field-grid">
+              <label class="field">
+                Utilisateurs concernés
+                <input name="users" placeholder="Ex : clients, équipe interne, bénévoles..." />
+              </label>
+              <label class="field">
+                Outils ou données existants
+                <input name="existingTools" placeholder="Ex : Excel, ERP, emails, site actuel..." />
+              </label>
+            </div>
+            <label class="field">
+              Contraintes importantes
+              <textarea name="constraints" rows="4" placeholder="Ex : disponibilité, processus existant, reprise de données, validation interne..."></textarea>
+            </label>
+          </section>
         </div>
 
-        <section class="step">
-          <div class="step-heading">
-            <span>01</span>
-            <div>
-              <p class="eyebrow">Besoin</p>
-              <h2>Quel type de projet préparez-vous ?</h2>
-            </div>
-          </div>
-          <div class="option-grid">
-            <label><input type="radio" name="projectType" value="Site clair" data-score="1" checked /> Site clair</label>
-            <label><input type="radio" name="projectType" value="Outil métier léger" data-score="3" /> Outil métier léger</label>
-            <label><input type="radio" name="projectType" value="Automatisation" data-score="3" /> Automatisation</label>
-            <label><input type="radio" name="projectType" value="Refonte" data-score="2" /> Refonte</label>
-            <label><input type="radio" name="projectType" value="Formulaire avancé" data-score="2" /> Formulaire avancé</label>
-          </div>
-          <label class="field">
-            Objectif principal
-            <textarea name="goal" rows="4" placeholder="Ex : centraliser les demandes, présenter une activité, éviter une double saisie..."></textarea>
-          </label>
-        </section>
-
-        <section class="step">
-          <div class="step-heading">
-            <span>02</span>
-            <div>
-              <p class="eyebrow">Complexité</p>
-              <h2>Quelles briques sont nécessaires ?</h2>
-            </div>
-          </div>
-          <div class="option-grid">
-            <label><input type="checkbox" name="features" value="Espace admin" data-score="2" /> Espace admin</label>
-            <label><input type="checkbox" name="features" value="Droits utilisateurs" data-score="3" /> Droits utilisateurs</label>
-            <label><input type="checkbox" name="features" value="Import / export" data-score="2" /> Import / export</label>
-            <label><input type="checkbox" name="features" value="Notifications email" data-score="1" /> Notifications email</label>
-            <label><input type="checkbox" name="features" value="Connexion à un outil existant" data-score="3" /> Connexion outil existant</label>
-            <label><input type="checkbox" name="features" value="Historique ou journal" data-score="2" /> Historique ou journal</label>
-            <label><input type="checkbox" name="features" value="Paiement" data-score="4" /> Paiement</label>
-            <label><input type="checkbox" name="features" value="Documents générés" data-score="2" /> Documents générés</label>
-          </div>
-        </section>
-
-        <section class="step">
-          <div class="step-heading">
-            <span>03</span>
-            <div>
-              <p class="eyebrow">Contexte</p>
-              <h2>Le projet est-il prêt à être cadré ?</h2>
-            </div>
-          </div>
-          <div class="field-grid">
-            <label class="field">
-              Délai souhaité
-              <select name="deadline">
-                <option value="Flexible" data-score="0">Flexible</option>
-                <option value="1 à 2 mois" data-score="1">1 à 2 mois</option>
-                <option value="Moins d'un mois" data-score="3">Moins d'un mois</option>
-                <option value="Urgent" data-score="5">Urgent</option>
-              </select>
-            </label>
-            <label class="field">
-              Budget approximatif
-              <select name="budget">
-                <option value="Non défini" data-score="2">Non défini</option>
-                <option value="Moins de 500 EUR" data-score="3">Moins de 500 EUR</option>
-                <option value="500 à 1500 EUR" data-score="1">500 à 1500 EUR</option>
-                <option value="1500 à 3000 EUR" data-score="0">1500 à 3000 EUR</option>
-                <option value="Plus de 3000 EUR" data-score="0">Plus de 3000 EUR</option>
-              </select>
-            </label>
-            <label class="field">
-              Clarté du besoin
-              <select name="clarity">
-                <option value="Assez clair" data-score="0">Assez clair</option>
-                <option value="Quelques zones floues" data-score="2">Quelques zones floues</option>
-                <option value="Très flou" data-score="4">Très flou</option>
-              </select>
-            </label>
-            <label class="field">
-              Contenus ou données
-              <select name="contentReady">
-                <option value="Déjà prêts" data-score="0">Déjà prêts</option>
-                <option value="Partiellement prêts" data-score="1">Partiellement prêts</option>
-                <option value="Pas prêts" data-score="3">Pas prêts</option>
-              </select>
-            </label>
-          </div>
-        </section>
-
-        <section class="step">
-          <div class="step-heading">
-            <span>04</span>
-            <div>
-              <p class="eyebrow">Précisions</p>
-              <h2>Ajoutez le contexte utile.</h2>
-            </div>
-          </div>
-          <div class="field-grid">
-            <label class="field">
-              Utilisateurs concernés
-              <input name="users" placeholder="Ex : clients, équipe interne, bénévoles..." />
-            </label>
-            <label class="field">
-              Outils ou données existants
-              <input name="existingTools" placeholder="Ex : Excel, ERP, emails, site actuel..." />
-            </label>
-          </div>
-          <label class="field">
-            Contraintes importantes
-            <textarea name="constraints" rows="4" placeholder="Ex : disponibilité, processus existant, reprise de données, validation interne..."></textarea>
-          </label>
-        </section>
-
-        <section id="resultat" class="result-section">
+        <aside id="resultat" class="result-dock">
           <div class="result-panel">
-            <p class="eyebrow">Résultat</p>
+            <p class="eyebrow">Résultat live</p>
             <h2 id="complexity-title">Complexité simple</h2>
             <p id="complexity-text">Remplissez le formulaire pour obtenir une synthèse.</p>
             <p class="score-detail" id="score-detail">Score indicatif : 0/0</p>
@@ -179,37 +189,37 @@ const asset = (path: string) =>
               <strong>Format conseillé</strong>
               <p id="recommended-format">À déterminer</p>
             </div>
-            <div class="result-grid">
-              <article>
-                <h3>Périmètre V1 recommandé</h3>
-                <ul id="v1-list"></ul>
-              </article>
-              <article>
-                <h3>À sortir du périmètre</h3>
-                <ul id="out-list"></ul>
-              </article>
-              <article>
-                <h3>Risques détectés</h3>
-                <ul id="risk-list"></ul>
-              </article>
-              <article>
-                <h3>Questions à clarifier</h3>
-                <ul id="question-list"></ul>
-              </article>
-            </div>
+          </div>
+          <div class="result-grid">
+            <article>
+              <h3>Périmètre V1</h3>
+              <ul id="v1-list"></ul>
+            </article>
+            <article>
+              <h3>Hors périmètre</h3>
+              <ul id="out-list"></ul>
+            </article>
+            <article>
+              <h3>Risques</h3>
+              <ul id="risk-list"></ul>
+            </article>
+            <article>
+              <h3>Questions</h3>
+              <ul id="question-list"></ul>
+            </article>
           </div>
           <div class="output-panel">
             <label class="field">
               Résumé prêt à envoyer
-              <textarea id="summary-output" rows="16" readonly></textarea>
+              <textarea id="summary-output" rows="12" readonly></textarea>
             </label>
             <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
             <div class="result-actions">
               <button class="button secondary" type="button" id="copy-summary">Copier</button>
-              <a class="button primary" id="email-link" href={`mailto:${contactEmail}`}>Envoyer par email</a>
+              <a class="button primary" id="email-link" href={`mailto:${contactEmail}`}>Envoyer</a>
             </div>
           </div>
-        </section>
+        </aside>
       </form>
     </main>
 
@@ -232,6 +242,7 @@ const asset = (path: string) =>
       const copyFeedback = document.querySelector("#copy-feedback");
       const progressLabel = document.querySelector("#progress-label");
       const progressText = document.querySelector("#progress-text");
+      const progressFill = document.querySelector("#progress-fill");
       const resetButton = document.querySelector("#reset-brief");
       const storageKey = "qvg-brief-builder";
       const contactEmail = "vialgouteyron@gmail.com";
@@ -273,6 +284,7 @@ const asset = (path: string) =>
         ].filter(Boolean).length;
 
         progressLabel.textContent = `Progression : ${completed}/4`;
+        progressFill.style.width = `${(completed / 4) * 100}%`;
         progressText.textContent =
           completed >= 3
             ? "Le brief devient exploitable. Le résumé peut déjà servir de base de discussion."
@@ -370,18 +382,20 @@ const asset = (path: string) =>
 <style>
   :root {
     color-scheme: light;
-    --bg: #f6f3ed;
-    --bg-soft: #ece6dc;
+    --bg: #f7f6f2;
+    --bg-soft: #eef1ee;
     --surface: #ffffff;
     --ink: #202124;
-    --muted: #66615b;
-    --line: #d8d0c4;
-    --accent: #3f6f62;
-    --accent-dark: #28483f;
-    --warm: #a06245;
+    --muted: #62645f;
+    --line: #d6ddd6;
+    --accent: #326c60;
+    --accent-dark: #1f493f;
+    --cool: #415b66;
+    --warm: #9a6548;
     --soft-green: #edf5f1;
     --soft-warm: #f7eee8;
     --shadow: 0 20px 54px rgba(32, 33, 36, 0.1);
+    --shadow-strong: 0 28px 80px rgba(31, 73, 63, 0.16);
     --radius: 8px;
     --page: 1160px;
   }
@@ -534,26 +548,27 @@ const asset = (path: string) =>
     box-shadow: var(--shadow);
   }
 
-  .brief-form {
+  .brief-shell {
     display: grid;
+    grid-template-columns: 230px minmax(0, 1fr) minmax(340px, 0.78fr);
     gap: 18px;
+    align-items: start;
     padding-top: 0;
   }
 
-  .progress-panel {
+  .app-sidebar {
     position: sticky;
-    top: 76px;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
+    top: 92px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .progress-panel {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow: 0 10px 30px rgba(32, 33, 36, 0.07);
-    backdrop-filter: blur(12px);
+    background: var(--surface);
+    box-shadow: var(--shadow);
   }
 
   .progress-panel p {
@@ -561,8 +576,60 @@ const asset = (path: string) =>
     line-height: 1.45;
   }
 
+  .progress-track {
+    height: 10px;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--bg-soft);
+  }
+
+  .progress-track span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), var(--cool));
+    transition: width 180ms ease;
+  }
+
+  .step-nav {
+    display: grid;
+    gap: 8px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px;
+    background: var(--surface);
+  }
+
+  .step-nav a {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: var(--radius);
+    padding: 10px;
+    color: var(--muted);
+    font-weight: 900;
+  }
+
+  .step-nav a:hover {
+    background: var(--soft-green);
+    color: var(--accent-dark);
+  }
+
+  .step-nav span {
+    color: var(--accent-dark);
+    font-size: 0.82rem;
+  }
+
+  .brief-main {
+    display: grid;
+    gap: 18px;
+  }
+
   .step {
     padding: clamp(22px, 4vw, 34px);
+    scroll-margin-top: 92px;
   }
 
   .step-heading {
@@ -587,6 +654,7 @@ const asset = (path: string) =>
   }
 
   .option-grid label {
+    position: relative;
     display: flex;
     min-height: 52px;
     align-items: center;
@@ -597,6 +665,18 @@ const asset = (path: string) =>
     background: var(--bg);
     color: var(--ink);
     font-weight: 800;
+    cursor: pointer;
+    transition:
+      background 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .option-grid label:hover {
+    border-color: rgba(50, 108, 96, 0.42);
+    box-shadow: 0 10px 22px rgba(32, 33, 36, 0.06);
+    transform: translateY(-1px);
   }
 
   input[type="radio"],
@@ -604,6 +684,13 @@ const asset = (path: string) =>
     width: auto;
     flex: 0 0 auto;
     accent-color: var(--accent);
+  }
+
+  .option-grid label:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--soft-green);
+    color: var(--accent-dark);
+    box-shadow: inset 0 0 0 1px rgba(50, 108, 96, 0.18);
   }
 
   .field {
@@ -625,20 +712,37 @@ const asset = (path: string) =>
     font: inherit;
   }
 
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid rgba(50, 108, 96, 0.28);
+    outline-offset: 3px;
+  }
+
   textarea {
     resize: vertical;
   }
 
-  .result-section {
+  .result-dock {
+    position: sticky;
+    top: 92px;
     display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
-    gap: 18px;
-    align-items: start;
+    gap: 14px;
+    max-height: calc(100vh - 112px);
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--shadow-strong);
+    backdrop-filter: blur(14px);
   }
 
   .result-panel,
   .output-panel {
-    padding: clamp(22px, 4vw, 34px);
+    padding: 18px;
   }
 
   .score-bar {
@@ -654,7 +758,7 @@ const asset = (path: string) =>
     width: 0%;
     height: 100%;
     border-radius: inherit;
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent), var(--cool));
     transition: width 160ms ease;
   }
 
@@ -682,8 +786,19 @@ const asset = (path: string) =>
 
   .result-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .result-grid article {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: var(--surface);
+  }
+
+  .result-grid h3 {
+    color: var(--accent-dark);
   }
 
   ul {
@@ -735,6 +850,15 @@ const asset = (path: string) =>
     font: inherit;
     font-weight: 900;
     cursor: pointer;
+    transition:
+      box-shadow 160ms ease,
+      transform 160ms ease,
+      background 160ms ease;
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(32, 33, 36, 0.08);
   }
 
   .button.primary {
@@ -753,11 +877,30 @@ const asset = (path: string) =>
     padding: 10px 14px;
   }
 
+  @media (max-width: 1180px) {
+    .brief-shell {
+      grid-template-columns: 210px minmax(0, 1fr);
+    }
+
+    .result-dock {
+      position: static;
+      grid-column: 1 / -1;
+      max-height: none;
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 940px) {
     .hero,
-    .result-section,
-    .result-grid {
+    .brief-shell {
       grid-template-columns: 1fr;
+    }
+
+    .app-sidebar {
+      position: static;
     }
   }
 
@@ -770,19 +913,14 @@ const asset = (path: string) =>
 
     .option-grid,
     .field-grid,
-    .result-actions,
-    .progress-panel {
+    .result-grid,
+    .result-actions {
       grid-template-columns: 1fr;
     }
 
-    .progress-panel {
-      position: static;
-      align-items: stretch;
-      flex-direction: column;
-    }
-
     h1 {
-      font-size: clamp(2.2rem, 12vw, 3.3rem);
+      font-size: clamp(2.15rem, 10.8vw, 2.95rem);
+      line-height: 1.02;
     }
 
     .button {
