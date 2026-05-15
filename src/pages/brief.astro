@@ -48,6 +48,14 @@ const asset = (path: string) =>
       </section>
 
       <form id="brief-form" class="brief-form section-pad">
+        <div class="progress-panel" aria-live="polite">
+          <div>
+            <strong id="progress-label">Progression : 0/4</strong>
+            <p id="progress-text">Complétez les champs utiles pour obtenir un brief exploitable.</p>
+          </div>
+          <button class="button secondary compact" type="button" id="reset-brief">Réinitialiser</button>
+        </div>
+
         <section class="step">
           <div class="step-heading">
             <span>01</span>
@@ -165,6 +173,7 @@ const asset = (path: string) =>
             <p class="eyebrow">Résultat</p>
             <h2 id="complexity-title">Complexité simple</h2>
             <p id="complexity-text">Remplissez le formulaire pour obtenir une synthèse.</p>
+            <p class="score-detail" id="score-detail">Score indicatif : 0/0</p>
             <div class="score-bar" aria-hidden="true"><span id="score-fill"></span></div>
             <div class="result-grid">
               <article>
@@ -182,6 +191,7 @@ const asset = (path: string) =>
               Résumé prêt à envoyer
               <textarea id="summary-output" rows="16" readonly></textarea>
             </label>
+            <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
             <div class="result-actions">
               <button class="button secondary" type="button" id="copy-summary">Copier</button>
               <a class="button primary" id="email-link" href={`mailto:${contactEmail}`}>Envoyer par email</a>
@@ -192,26 +202,27 @@ const asset = (path: string) =>
     </main>
 
     <script>
+      import { evaluateBrief } from "../lib/briefScoring";
+
       const form = document.querySelector("#brief-form");
       const title = document.querySelector("#complexity-title");
       const text = document.querySelector("#complexity-text");
+      const scoreDetail = document.querySelector("#score-detail");
       const scoreFill = document.querySelector("#score-fill");
       const riskList = document.querySelector("#risk-list");
       const questionList = document.querySelector("#question-list");
       const output = document.querySelector("#summary-output");
       const emailLink = document.querySelector("#email-link");
       const copyButton = document.querySelector("#copy-summary");
+      const copyFeedback = document.querySelector("#copy-feedback");
+      const progressLabel = document.querySelector("#progress-label");
+      const progressText = document.querySelector("#progress-text");
+      const resetButton = document.querySelector("#reset-brief");
       const storageKey = "qvg-brief-builder";
       const contactEmail = "vialgouteyron@gmail.com";
 
       const readCheckedValues = (name) =>
         Array.from(form.querySelectorAll(`[name="${name}"]:checked`)).map((field) => field.value);
-
-      const getScore = () =>
-        Array.from(form.querySelectorAll("input:checked, option:checked")).reduce(
-          (total, field) => total + Number(field.dataset.score || 0),
-          0,
-        );
 
       const getFormData = () => {
         const data = new FormData(form);
@@ -229,74 +240,6 @@ const asset = (path: string) =>
         };
       };
 
-      const getLevel = (score) => {
-        if (score >= 17) {
-          return {
-            title: "Complexité élevée",
-            text: "Le projet mérite probablement un cadrage séparé avant développement. Il faut réduire ou découper.",
-            estimate: "Cadrage recommandé avant devis. Projet probablement à découper en lots.",
-          };
-        }
-        if (score >= 9) {
-          return {
-            title: "Complexité moyenne",
-            text: "Le projet paraît faisable, mais certains points doivent être clarifiés pour éviter les dérives.",
-            estimate: "Format probable : petit outil ou site utile avec cadrage court.",
-          };
-        }
-        return {
-          title: "Complexité simple",
-          text: "Le projet semble compatible avec une intervention courte si le contenu et les validations sont prêts.",
-          estimate: "Format probable : site clair, formulaire avancé ou mini outil très cadré.",
-        };
-      };
-
-      const buildRisks = (data, score) => {
-        const risks = [];
-        if (data.deadline === "Urgent" || data.deadline === "Moins d'un mois") {
-          risks.push("Délai court : le périmètre doit être réduit et validé vite.");
-        }
-        if (data.budget === "Moins de 500 EUR") {
-          risks.push("Budget bas : il faudra probablement viser une version très limitée.");
-        }
-        if (data.budget === "Non défini") {
-          risks.push("Budget non défini : difficile d'arbitrer les priorités.");
-        }
-        if (data.clarity !== "Assez clair") {
-          risks.push("Besoin encore flou : un cadrage court est nécessaire avant de développer.");
-        }
-        if (data.contentReady === "Pas prêts") {
-          risks.push("Contenus ou données pas prêts : risque de blocage ou d'allers-retours.");
-        }
-        if (data.features.includes("Paiement")) {
-          risks.push("Paiement en ligne : sécurité, responsabilité et tests à traiter sérieusement.");
-        }
-        if (data.features.includes("Connexion à un outil existant")) {
-          risks.push("Intégration externe : dépendance à la qualité de l'outil ou de ses exports/API.");
-        }
-        if (score >= 17) {
-          risks.push("Accumulation de fonctionnalités : le projet doit être découpé.");
-        }
-        return risks.length ? risks : ["Aucun risque majeur détecté à ce stade, sous réserve d'un périmètre écrit."];
-      };
-
-      const buildQuestions = (data) => {
-        const questions = [
-          "Qui valide le périmètre et les retours ?",
-          "Quelle est la version minimale réellement utile ?",
-        ];
-        if (!data.goal.trim()) questions.push("Quel résultat concret doit être obtenu à la fin du projet ?");
-        if (!data.users.trim()) questions.push("Qui utilise l'outil et à quelle fréquence ?");
-        if (data.features.length) questions.push("Quelles fonctionnalités sont indispensables en V1 ?");
-        if (data.existingTools || data.features.includes("Connexion à un outil existant")) {
-          questions.push("Les données existantes sont-elles accessibles, propres et exportables ?");
-        }
-        if (data.contentReady !== "Déjà prêts") {
-          questions.push("Qui fournit les contenus, données, visuels ou exemples métier ?");
-        }
-        return questions;
-      };
-
       const renderList = (node, items) => {
         node.innerHTML = "";
         items.forEach((item) => {
@@ -306,84 +249,100 @@ const asset = (path: string) =>
         });
       };
 
-      const buildSummary = (data, level, risks, questions) => `Bonjour Quentin,
+      const updateProgress = (data) => {
+        const completed = [
+          Boolean(data.projectType && data.goal.trim()),
+          data.features.length > 0,
+          data.deadline && data.budget && data.clarity && data.contentReady,
+          Boolean(data.users.trim() || data.existingTools.trim() || data.constraints.trim()),
+        ].filter(Boolean).length;
 
-Je vous contacte pour préparer un projet web.
+        progressLabel.textContent = `Progression : ${completed}/4`;
+        progressText.textContent =
+          completed >= 3
+            ? "Le brief devient exploitable. Le résumé peut déjà servir de base de discussion."
+            : "Complétez au moins l'objectif, quelques briques et le contexte pour obtenir une synthèse utile.";
+      };
 
-Type de projet : ${data.projectType}
-Objectif principal : ${data.goal || "À préciser"}
-Fonctionnalités envisagées : ${data.features.length ? data.features.join(", ") : "Aucune fonctionnalité avancée indiquée"}
-Utilisateurs concernés : ${data.users || "À préciser"}
-Outils ou données existants : ${data.existingTools || "À préciser"}
-Délai souhaité : ${data.deadline}
-Budget approximatif : ${data.budget}
-Clarté du besoin : ${data.clarity}
-Contenus ou données : ${data.contentReady}
-Contraintes : ${data.constraints || "À préciser"}
-
-Lecture de l'assistant :
-${level.title}
-${level.text}
-${level.estimate}
-
-Risques détectés :
-${risks.map((risk) => `- ${risk}`).join("\n")}
-
-Questions à clarifier :
-${questions.map((question) => `- ${question}`).join("\n")}
-
-Merci,`;
+      const saveData = (data) => {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(data));
+        } catch {
+          progressText.textContent = "La sauvegarde locale est indisponible, mais le résumé reste utilisable.";
+        }
+      };
 
       const update = () => {
         const data = getFormData();
-        const score = getScore();
-        const level = getLevel(score);
-        const risks = buildRisks(data, score);
-        const questions = buildQuestions(data);
-        const summary = buildSummary(data, level, risks, questions);
+        const result = evaluateBrief(data);
 
-        title.textContent = level.title;
-        text.textContent = `${level.text} ${level.estimate}`;
-        scoreFill.style.width = `${Math.min(100, Math.round((score / 24) * 100))}%`;
-        renderList(riskList, risks);
-        renderList(questionList, questions);
-        output.value = summary;
-        emailLink.href = `mailto:${contactEmail}?subject=${encodeURIComponent("Brief projet web")}&body=${encodeURIComponent(summary)}`;
-        localStorage.setItem(storageKey, JSON.stringify(data));
+        title.textContent = result.level.title;
+        text.textContent = `${result.level.text} ${result.level.recommendation}`;
+        scoreDetail.textContent = `Score indicatif : ${result.score}/${result.maxScore}`;
+        scoreFill.style.width = `${Math.min(100, Math.round((result.score / result.maxScore) * 100))}%`;
+        renderList(riskList, result.risks);
+        renderList(questionList, result.questions);
+        output.value = result.summary;
+        emailLink.href = `mailto:${contactEmail}?subject=${encodeURIComponent("Brief projet web")}&body=${encodeURIComponent(result.summary)}`;
+        updateProgress(data);
+        saveData(data);
       };
 
       const restore = () => {
         const raw = localStorage.getItem(storageKey);
         if (!raw) return;
-        const data = JSON.parse(raw);
-        Object.entries(data).forEach(([key, value]) => {
-          if (Array.isArray(value)) {
-            value.forEach((item) => {
-              const field = form.querySelector(`[name="${key}"][value="${CSS.escape(item)}"]`);
-              if (field) field.checked = true;
-            });
-            return;
-          }
-          const field = form.querySelector(`[name="${key}"]`);
-          if (!field) return;
-          if (field.type === "radio") {
-            const radio = form.querySelector(`[name="${key}"][value="${CSS.escape(value)}"]`);
-            if (radio) radio.checked = true;
-          } else {
-            field.value = value;
-          }
-        });
+        try {
+          const data = JSON.parse(raw);
+          Object.entries(data).forEach(([key, value]) => {
+            if (Array.isArray(value)) {
+              value.forEach((item) => {
+                const field = form.querySelector(`[name="${key}"][value="${CSS.escape(item)}"]`);
+                if (field) field.checked = true;
+              });
+              return;
+            }
+            const field = form.querySelector(`[name="${key}"]`);
+            if (!field) return;
+            if (field.type === "radio") {
+              const radio = form.querySelector(`[name="${key}"][value="${CSS.escape(value)}"]`);
+              if (radio) radio.checked = true;
+            } else {
+              field.value = value;
+            }
+          });
+        } catch {
+          localStorage.removeItem(storageKey);
+        }
       };
 
       copyButton.addEventListener("click", async () => {
-        await navigator.clipboard.writeText(output.value);
-        copyButton.textContent = "Copié";
-        window.setTimeout(() => {
-          copyButton.textContent = "Copier";
-        }, 1400);
+        try {
+          await navigator.clipboard.writeText(output.value);
+          copyFeedback.textContent = "Résumé copié.";
+          copyButton.textContent = "Copié";
+          window.setTimeout(() => {
+            copyFeedback.textContent = "";
+            copyButton.textContent = "Copier";
+          }, 1400);
+        } catch {
+          output.focus();
+          output.select();
+          copyFeedback.textContent = "Copie automatique indisponible. Le résumé est sélectionné.";
+        }
       });
 
+      resetButton.addEventListener("click", () => {
+        localStorage.removeItem(storageKey);
+        form.reset();
+        update();
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        update();
+      });
       form.addEventListener("input", update);
+      form.addEventListener("change", update);
       restore();
       update();
     </script>
@@ -563,6 +522,27 @@ Merci,`;
     padding-top: 0;
   }
 
+  .progress-panel {
+    position: sticky;
+    top: 76px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 10px 30px rgba(32, 33, 36, 0.07);
+    backdrop-filter: blur(12px);
+  }
+
+  .progress-panel p {
+    margin: 4px 0 0;
+    line-height: 1.45;
+  }
+
   .step {
     padding: clamp(22px, 4vw, 34px);
   }
@@ -658,6 +638,12 @@ Merci,`;
     transition: width 160ms ease;
   }
 
+  .score-detail {
+    margin: 12px 0 0;
+    color: var(--accent-dark);
+    font-weight: 850;
+  }
+
   .result-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -693,6 +679,13 @@ Merci,`;
     margin-top: 14px;
   }
 
+  .copy-feedback {
+    min-height: 1.4em;
+    margin: 10px 0 0;
+    color: var(--accent-dark);
+    font-weight: 800;
+  }
+
   .button {
     display: inline-flex;
     min-height: 50px;
@@ -718,6 +711,12 @@ Merci,`;
     background: #fff;
   }
 
+  .button.compact {
+    min-height: 42px;
+    flex: 0 0 auto;
+    padding: 10px 14px;
+  }
+
   @media (max-width: 940px) {
     .hero,
     .result-section,
@@ -735,8 +734,15 @@ Merci,`;
 
     .option-grid,
     .field-grid,
-    .result-actions {
+    .result-actions,
+    .progress-panel {
       grid-template-columns: 1fr;
+    }
+
+    .progress-panel {
+      position: static;
+      align-items: stretch;
+      flex-direction: column;
     }
 
     h1 {

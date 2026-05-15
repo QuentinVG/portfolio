@@ -19,6 +19,11 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - [x] Nettoyer le projet et le README.
 - [x] Vérifier le build et les routes locales.
 - [x] Déployer.
+- [x] Durcir l'assistant après audit : submit bloqué, copie robuste, restauration locale protégée, reset et progression.
+- [x] Extraire la logique de scoring dans `src/lib/briefScoring.ts`.
+- [x] Rendre le scoring plus explicite avec score réel, score maximal et recommandations.
+- [x] Ajouter une étude de cas anonymisée plus structurée.
+- [x] Ajouter un aperçu produit de l'assistant sur la page d'accueil.
 
 ## Dernière vérification
 
@@ -29,6 +34,13 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
   - `http://127.0.0.1:4321/portfolio/brief`
 - Déploiement GitHub Pages : OK via le workflow `Deploy to GitHub Pages`.
 - Note : GitHub affiche un avertissement de dépréciation Node 20 sur une action interne liée à `actions/upload-pages-artifact@v4`. Le workflow utilise déjà Node 24 pour le build.
+
+## Audit traité
+
+- Le formulaire `/brief` ne peut plus provoquer de navigation involontaire au submit.
+- Les erreurs possibles de presse-papiers et de `localStorage` sont gérées.
+- Le scoring n'est plus codé directement dans la page et expose une grille plus lisible.
+- La home apporte davantage de preuve produit via un aperçu de résultat et une étude de cas anonymisée.
 
 ## Positionnement recommandé
 

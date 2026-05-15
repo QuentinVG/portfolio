@@ -90,6 +90,18 @@ const process = [
   ["03", "Construire", "Développer une version utile, maintenable, testable et adaptée au budget."],
   ["04", "Livrer", "Regrouper les retours, corriger proprement et documenter le minimum nécessaire."],
 ];
+
+const caseStudy = {
+  title: "Flux de demandes internes trop dispersé",
+  context:
+    "Une petite équipe suit des demandes dans des emails, fichiers et échanges informels. L'information existe, mais personne ne sait vraiment quel élément fait foi.",
+  constraint:
+    "Le besoin paraît simple au départ, mais il touche aux statuts, aux validations, aux droits et à l'historique. Sans cadrage, le projet peut vite devenir un mini ERP.",
+  decision:
+    "Réduire la V1 à un suivi clair : création de demande, statut, commentaire, filtre, historique minimal et export. Le reste passe en options à arbitrer.",
+  result:
+    "Un périmètre plus court, plus facile à estimer, avec moins de risques de dérive et une première version réellement livrable.",
+};
 ---
 
 <html lang="fr">
@@ -186,6 +198,21 @@ const process = [
           <span class="status">Disponible</span>
           <h3>Assistant de cadrage</h3>
           <p>Besoin, complexité, contexte, risques, questions à clarifier et synthèse email.</p>
+          <div class="product-preview" aria-label="Aperçu du résultat généré">
+            <div>
+              <span>Score</span>
+              <strong>15/37</strong>
+            </div>
+            <div>
+              <span>Lecture</span>
+              <strong>Complexité moyenne</strong>
+            </div>
+            <ul>
+              <li>Délai court à clarifier</li>
+              <li>Version minimale à isoler</li>
+              <li>Données existantes à valider</li>
+            </ul>
+          </div>
           <a class="button primary" href={briefHref}>Lancer l'assistant</a>
         </div>
       </section>
@@ -243,6 +270,30 @@ const process = [
           <p class="eyebrow">Exemples anonymisés</p>
           <h2>Des problématiques réalistes, sans donnée client ni détail confidentiel.</h2>
         </div>
+        <article class="case-study">
+          <div>
+            <p class="eyebrow">Étude de cas anonymisée</p>
+            <h3>{caseStudy.title}</h3>
+          </div>
+          <div class="case-grid">
+            <div>
+              <strong>Contexte</strong>
+              <p>{caseStudy.context}</p>
+            </div>
+            <div>
+              <strong>Contrainte</strong>
+              <p>{caseStudy.constraint}</p>
+            </div>
+            <div>
+              <strong>Décision</strong>
+              <p>{caseStudy.decision}</p>
+            </div>
+            <div>
+              <strong>Résultat visé</strong>
+              <p>{caseStudy.result}</p>
+            </div>
+          </div>
+        </article>
         <div class="card-grid two">
           {examples.map((item) => (
             <article class="example-card">
@@ -592,6 +643,37 @@ const process = [
     margin-top: 18px;
   }
 
+  .product-preview {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: var(--bg);
+  }
+
+  .product-preview div {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+
+  .product-preview span {
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .product-preview strong {
+    text-align: right;
+  }
+
+  .product-preview ul {
+    margin-top: 4px;
+  }
+
   .status {
     display: inline-flex;
     margin-bottom: 18px;
@@ -687,6 +769,35 @@ const process = [
     background: var(--bg);
   }
 
+  .case-study {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.42fr) minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 42px);
+    margin-bottom: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(24px, 4vw, 34px);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .case-grid strong {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .case-grid p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.62;
+  }
+
   .example-card strong {
     display: block;
     margin-top: 18px;
@@ -742,6 +853,7 @@ const process = [
     .hero,
     .app-section,
     .fit-section,
+    .case-study,
     .contact-section {
       grid-template-columns: 1fr;
     }
@@ -787,6 +899,7 @@ const process = [
     .card-grid.three,
     .card-grid.four,
     .card-grid.two,
+    .case-grid,
     .strength-list,
     .metric-grid {
       grid-template-columns: 1fr;
