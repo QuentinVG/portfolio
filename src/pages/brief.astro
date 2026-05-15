@@ -1,0 +1,750 @@
+---
+const contactEmail = "vialgouteyron@gmail.com";
+const asset = (path: string) =>
+  `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
+    <link rel="icon" href={asset("favicon.ico")} />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Assistant de cadrage pour préparer un brief de site, outil web ou automatisation légère."
+    />
+    <title>Assistant de cadrage - Quentin Vial-Gouteyron</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={asset("")}>
+        <span>Quentin Vial-Gouteyron</span>
+        <small>Assistant de cadrage</small>
+      </a>
+      <nav>
+        <a href={asset("")}>Portfolio</a>
+        <a class="nav-cta" href="#resultat">Résultat</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section-pad">
+        <div>
+          <p class="eyebrow">Brief Builder</p>
+          <h1>Préparer un projet web sans partir dans le flou.</h1>
+          <p class="lead">
+            Répondez à quelques questions. L'assistant estime la complexité, signale les risques,
+            liste les points à clarifier et génère un résumé prêt à envoyer.
+          </p>
+        </div>
+        <aside class="summary-card">
+          <strong>V1 volontairement simple</strong>
+          <p>
+            Pas de compte, pas de base de données, pas d'envoi automatique. Vos réponses restent dans votre navigateur
+            et servent uniquement à préparer un brief clair.
+          </p>
+        </aside>
+      </section>
+
+      <form id="brief-form" class="brief-form section-pad">
+        <section class="step">
+          <div class="step-heading">
+            <span>01</span>
+            <div>
+              <p class="eyebrow">Besoin</p>
+              <h2>Quel type de projet préparez-vous ?</h2>
+            </div>
+          </div>
+          <div class="option-grid">
+            <label><input type="radio" name="projectType" value="Site clair" data-score="1" checked /> Site clair</label>
+            <label><input type="radio" name="projectType" value="Outil métier léger" data-score="3" /> Outil métier léger</label>
+            <label><input type="radio" name="projectType" value="Automatisation" data-score="3" /> Automatisation</label>
+            <label><input type="radio" name="projectType" value="Refonte" data-score="2" /> Refonte</label>
+            <label><input type="radio" name="projectType" value="Formulaire avancé" data-score="2" /> Formulaire avancé</label>
+          </div>
+          <label class="field">
+            Objectif principal
+            <textarea name="goal" rows="4" placeholder="Ex : centraliser les demandes, présenter une activité, éviter une double saisie..."></textarea>
+          </label>
+        </section>
+
+        <section class="step">
+          <div class="step-heading">
+            <span>02</span>
+            <div>
+              <p class="eyebrow">Complexité</p>
+              <h2>Quelles briques sont nécessaires ?</h2>
+            </div>
+          </div>
+          <div class="option-grid">
+            <label><input type="checkbox" name="features" value="Espace admin" data-score="2" /> Espace admin</label>
+            <label><input type="checkbox" name="features" value="Droits utilisateurs" data-score="3" /> Droits utilisateurs</label>
+            <label><input type="checkbox" name="features" value="Import / export" data-score="2" /> Import / export</label>
+            <label><input type="checkbox" name="features" value="Notifications email" data-score="1" /> Notifications email</label>
+            <label><input type="checkbox" name="features" value="Connexion à un outil existant" data-score="3" /> Connexion outil existant</label>
+            <label><input type="checkbox" name="features" value="Historique ou journal" data-score="2" /> Historique ou journal</label>
+            <label><input type="checkbox" name="features" value="Paiement" data-score="4" /> Paiement</label>
+            <label><input type="checkbox" name="features" value="Documents générés" data-score="2" /> Documents générés</label>
+          </div>
+        </section>
+
+        <section class="step">
+          <div class="step-heading">
+            <span>03</span>
+            <div>
+              <p class="eyebrow">Contexte</p>
+              <h2>Le projet est-il prêt à être cadré ?</h2>
+            </div>
+          </div>
+          <div class="field-grid">
+            <label class="field">
+              Délai souhaité
+              <select name="deadline">
+                <option value="Flexible" data-score="0">Flexible</option>
+                <option value="1 à 2 mois" data-score="1">1 à 2 mois</option>
+                <option value="Moins d'un mois" data-score="3">Moins d'un mois</option>
+                <option value="Urgent" data-score="5">Urgent</option>
+              </select>
+            </label>
+            <label class="field">
+              Budget approximatif
+              <select name="budget">
+                <option value="Non défini" data-score="2">Non défini</option>
+                <option value="Moins de 500 EUR" data-score="3">Moins de 500 EUR</option>
+                <option value="500 à 1500 EUR" data-score="1">500 à 1500 EUR</option>
+                <option value="1500 à 3000 EUR" data-score="0">1500 à 3000 EUR</option>
+                <option value="Plus de 3000 EUR" data-score="0">Plus de 3000 EUR</option>
+              </select>
+            </label>
+            <label class="field">
+              Clarté du besoin
+              <select name="clarity">
+                <option value="Assez clair" data-score="0">Assez clair</option>
+                <option value="Quelques zones floues" data-score="2">Quelques zones floues</option>
+                <option value="Très flou" data-score="4">Très flou</option>
+              </select>
+            </label>
+            <label class="field">
+              Contenus ou données
+              <select name="contentReady">
+                <option value="Déjà prêts" data-score="0">Déjà prêts</option>
+                <option value="Partiellement prêts" data-score="1">Partiellement prêts</option>
+                <option value="Pas prêts" data-score="3">Pas prêts</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="step">
+          <div class="step-heading">
+            <span>04</span>
+            <div>
+              <p class="eyebrow">Précisions</p>
+              <h2>Ajoutez le contexte utile.</h2>
+            </div>
+          </div>
+          <div class="field-grid">
+            <label class="field">
+              Utilisateurs concernés
+              <input name="users" placeholder="Ex : clients, équipe interne, bénévoles..." />
+            </label>
+            <label class="field">
+              Outils ou données existants
+              <input name="existingTools" placeholder="Ex : Excel, ERP, emails, site actuel..." />
+            </label>
+          </div>
+          <label class="field">
+            Contraintes importantes
+            <textarea name="constraints" rows="4" placeholder="Ex : disponibilité, processus existant, reprise de données, validation interne..."></textarea>
+          </label>
+        </section>
+
+        <section id="resultat" class="result-section">
+          <div class="result-panel">
+            <p class="eyebrow">Résultat</p>
+            <h2 id="complexity-title">Complexité simple</h2>
+            <p id="complexity-text">Remplissez le formulaire pour obtenir une synthèse.</p>
+            <div class="score-bar" aria-hidden="true"><span id="score-fill"></span></div>
+            <div class="result-grid">
+              <article>
+                <h3>Risques détectés</h3>
+                <ul id="risk-list"></ul>
+              </article>
+              <article>
+                <h3>Questions à clarifier</h3>
+                <ul id="question-list"></ul>
+              </article>
+            </div>
+          </div>
+          <div class="output-panel">
+            <label class="field">
+              Résumé prêt à envoyer
+              <textarea id="summary-output" rows="16" readonly></textarea>
+            </label>
+            <div class="result-actions">
+              <button class="button secondary" type="button" id="copy-summary">Copier</button>
+              <a class="button primary" id="email-link" href={`mailto:${contactEmail}`}>Envoyer par email</a>
+            </div>
+          </div>
+        </section>
+      </form>
+    </main>
+
+    <script>
+      const form = document.querySelector("#brief-form");
+      const title = document.querySelector("#complexity-title");
+      const text = document.querySelector("#complexity-text");
+      const scoreFill = document.querySelector("#score-fill");
+      const riskList = document.querySelector("#risk-list");
+      const questionList = document.querySelector("#question-list");
+      const output = document.querySelector("#summary-output");
+      const emailLink = document.querySelector("#email-link");
+      const copyButton = document.querySelector("#copy-summary");
+      const storageKey = "qvg-brief-builder";
+      const contactEmail = "vialgouteyron@gmail.com";
+
+      const readCheckedValues = (name) =>
+        Array.from(form.querySelectorAll(`[name="${name}"]:checked`)).map((field) => field.value);
+
+      const getScore = () =>
+        Array.from(form.querySelectorAll("input:checked, option:checked")).reduce(
+          (total, field) => total + Number(field.dataset.score || 0),
+          0,
+        );
+
+      const getFormData = () => {
+        const data = new FormData(form);
+        return {
+          projectType: data.get("projectType") || "",
+          goal: data.get("goal") || "",
+          features: readCheckedValues("features"),
+          deadline: data.get("deadline") || "",
+          budget: data.get("budget") || "",
+          clarity: data.get("clarity") || "",
+          contentReady: data.get("contentReady") || "",
+          users: data.get("users") || "",
+          existingTools: data.get("existingTools") || "",
+          constraints: data.get("constraints") || "",
+        };
+      };
+
+      const getLevel = (score) => {
+        if (score >= 17) {
+          return {
+            title: "Complexité élevée",
+            text: "Le projet mérite probablement un cadrage séparé avant développement. Il faut réduire ou découper.",
+            estimate: "Cadrage recommandé avant devis. Projet probablement à découper en lots.",
+          };
+        }
+        if (score >= 9) {
+          return {
+            title: "Complexité moyenne",
+            text: "Le projet paraît faisable, mais certains points doivent être clarifiés pour éviter les dérives.",
+            estimate: "Format probable : petit outil ou site utile avec cadrage court.",
+          };
+        }
+        return {
+          title: "Complexité simple",
+          text: "Le projet semble compatible avec une intervention courte si le contenu et les validations sont prêts.",
+          estimate: "Format probable : site clair, formulaire avancé ou mini outil très cadré.",
+        };
+      };
+
+      const buildRisks = (data, score) => {
+        const risks = [];
+        if (data.deadline === "Urgent" || data.deadline === "Moins d'un mois") {
+          risks.push("Délai court : le périmètre doit être réduit et validé vite.");
+        }
+        if (data.budget === "Moins de 500 EUR") {
+          risks.push("Budget bas : il faudra probablement viser une version très limitée.");
+        }
+        if (data.budget === "Non défini") {
+          risks.push("Budget non défini : difficile d'arbitrer les priorités.");
+        }
+        if (data.clarity !== "Assez clair") {
+          risks.push("Besoin encore flou : un cadrage court est nécessaire avant de développer.");
+        }
+        if (data.contentReady === "Pas prêts") {
+          risks.push("Contenus ou données pas prêts : risque de blocage ou d'allers-retours.");
+        }
+        if (data.features.includes("Paiement")) {
+          risks.push("Paiement en ligne : sécurité, responsabilité et tests à traiter sérieusement.");
+        }
+        if (data.features.includes("Connexion à un outil existant")) {
+          risks.push("Intégration externe : dépendance à la qualité de l'outil ou de ses exports/API.");
+        }
+        if (score >= 17) {
+          risks.push("Accumulation de fonctionnalités : le projet doit être découpé.");
+        }
+        return risks.length ? risks : ["Aucun risque majeur détecté à ce stade, sous réserve d'un périmètre écrit."];
+      };
+
+      const buildQuestions = (data) => {
+        const questions = [
+          "Qui valide le périmètre et les retours ?",
+          "Quelle est la version minimale réellement utile ?",
+        ];
+        if (!data.goal.trim()) questions.push("Quel résultat concret doit être obtenu à la fin du projet ?");
+        if (!data.users.trim()) questions.push("Qui utilise l'outil et à quelle fréquence ?");
+        if (data.features.length) questions.push("Quelles fonctionnalités sont indispensables en V1 ?");
+        if (data.existingTools || data.features.includes("Connexion à un outil existant")) {
+          questions.push("Les données existantes sont-elles accessibles, propres et exportables ?");
+        }
+        if (data.contentReady !== "Déjà prêts") {
+          questions.push("Qui fournit les contenus, données, visuels ou exemples métier ?");
+        }
+        return questions;
+      };
+
+      const renderList = (node, items) => {
+        node.innerHTML = "";
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          node.appendChild(li);
+        });
+      };
+
+      const buildSummary = (data, level, risks, questions) => `Bonjour Quentin,
+
+Je vous contacte pour préparer un projet web.
+
+Type de projet : ${data.projectType}
+Objectif principal : ${data.goal || "À préciser"}
+Fonctionnalités envisagées : ${data.features.length ? data.features.join(", ") : "Aucune fonctionnalité avancée indiquée"}
+Utilisateurs concernés : ${data.users || "À préciser"}
+Outils ou données existants : ${data.existingTools || "À préciser"}
+Délai souhaité : ${data.deadline}
+Budget approximatif : ${data.budget}
+Clarté du besoin : ${data.clarity}
+Contenus ou données : ${data.contentReady}
+Contraintes : ${data.constraints || "À préciser"}
+
+Lecture de l'assistant :
+${level.title}
+${level.text}
+${level.estimate}
+
+Risques détectés :
+${risks.map((risk) => `- ${risk}`).join("\n")}
+
+Questions à clarifier :
+${questions.map((question) => `- ${question}`).join("\n")}
+
+Merci,`;
+
+      const update = () => {
+        const data = getFormData();
+        const score = getScore();
+        const level = getLevel(score);
+        const risks = buildRisks(data, score);
+        const questions = buildQuestions(data);
+        const summary = buildSummary(data, level, risks, questions);
+
+        title.textContent = level.title;
+        text.textContent = `${level.text} ${level.estimate}`;
+        scoreFill.style.width = `${Math.min(100, Math.round((score / 24) * 100))}%`;
+        renderList(riskList, risks);
+        renderList(questionList, questions);
+        output.value = summary;
+        emailLink.href = `mailto:${contactEmail}?subject=${encodeURIComponent("Brief projet web")}&body=${encodeURIComponent(summary)}`;
+        localStorage.setItem(storageKey, JSON.stringify(data));
+      };
+
+      const restore = () => {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        Object.entries(data).forEach(([key, value]) => {
+          if (Array.isArray(value)) {
+            value.forEach((item) => {
+              const field = form.querySelector(`[name="${key}"][value="${CSS.escape(item)}"]`);
+              if (field) field.checked = true;
+            });
+            return;
+          }
+          const field = form.querySelector(`[name="${key}"]`);
+          if (!field) return;
+          if (field.type === "radio") {
+            const radio = form.querySelector(`[name="${key}"][value="${CSS.escape(value)}"]`);
+            if (radio) radio.checked = true;
+          } else {
+            field.value = value;
+          }
+        });
+      };
+
+      copyButton.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(output.value);
+        copyButton.textContent = "Copié";
+        window.setTimeout(() => {
+          copyButton.textContent = "Copier";
+        }, 1400);
+      });
+
+      form.addEventListener("input", update);
+      restore();
+      update();
+    </script>
+  </body>
+</html>
+
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f6f3ed;
+    --bg-soft: #ece6dc;
+    --surface: #ffffff;
+    --ink: #202124;
+    --muted: #66615b;
+    --line: #d8d0c4;
+    --accent: #3f6f62;
+    --accent-dark: #28483f;
+    --warm: #a06245;
+    --soft-green: #edf5f1;
+    --soft-warm: #f7eee8;
+    --shadow: 0 20px 54px rgba(32, 33, 36, 0.1);
+    --radius: 8px;
+    --page: 1160px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--bg);
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px clamp(20px, 5vw, 72px);
+    border-bottom: 1px solid rgba(216, 208, 196, 0.78);
+    background: rgba(246, 243, 237, 0.94);
+    backdrop-filter: blur(14px);
+  }
+
+  .brand {
+    display: grid;
+    gap: 2px;
+    font-weight: 900;
+  }
+
+  .brand small,
+  p,
+  li,
+  input,
+  textarea,
+  select {
+    color: var(--muted);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(12px, 2.3vw, 28px);
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 800;
+  }
+
+  .nav-cta {
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: var(--accent-dark);
+    background: var(--soft-green);
+  }
+
+  .section-pad {
+    padding: clamp(48px, 7vw, 92px) max(clamp(20px, 5vw, 72px), calc((100vw - var(--page)) / 2));
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 14px;
+    color: var(--accent-dark);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  label,
+  textarea,
+  input,
+  select {
+    overflow-wrap: anywhere;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    letter-spacing: 0;
+  }
+
+  h1 {
+    max-width: 920px;
+    font-size: clamp(2.35rem, 5vw, 4.7rem);
+    line-height: 1;
+  }
+
+  h2 {
+    font-size: clamp(1.55rem, 2.5vw, 2.35rem);
+    line-height: 1.08;
+  }
+
+  h3 {
+    font-size: 1.08rem;
+    line-height: 1.28;
+  }
+
+  .lead,
+  .summary-card p,
+  .result-panel p {
+    line-height: 1.62;
+  }
+
+  .lead {
+    max-width: 780px;
+    margin: 24px 0 0;
+    font-size: clamp(1.06rem, 1.6vw, 1.22rem);
+  }
+
+  .summary-card,
+  .step,
+  .result-panel,
+  .output-panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .summary-card {
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .brief-form {
+    display: grid;
+    gap: 18px;
+    padding-top: 0;
+  }
+
+  .step {
+    padding: clamp(22px, 4vw, 34px);
+  }
+
+  .step-heading {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .step-heading > span {
+    color: rgba(160, 98, 69, 0.42);
+    font-size: 2.5rem;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .option-grid,
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .option-grid label {
+    display: flex;
+    min-height: 52px;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 800;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    accent-color: var(--accent);
+  }
+
+  .field {
+    display: grid;
+    gap: 8px;
+    margin-top: 18px;
+    color: var(--ink);
+    font-weight: 850;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    background: #fff;
+    font: inherit;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .result-section {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .result-panel,
+  .output-panel {
+    padding: clamp(22px, 4vw, 34px);
+  }
+
+  .score-bar {
+    height: 12px;
+    margin: 22px 0;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--bg-soft);
+  }
+
+  .score-bar span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--accent);
+    transition: width 160ms ease;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  ul {
+    display: grid;
+    gap: 10px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding-left: 24px;
+    line-height: 1.48;
+  }
+
+  li::before {
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    content: "+";
+    font-weight: 900;
+  }
+
+  .result-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 13px 18px;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .button.primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .button.secondary {
+    background: #fff;
+  }
+
+  @media (max-width: 940px) {
+    .hero,
+    .result-section,
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .site-header {
+      position: static;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .option-grid,
+    .field-grid,
+    .result-actions {
+      grid-template-columns: 1fr;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 12vw, 3.3rem);
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>
