@@ -18,7 +18,17 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - [x] Ajouter des cas anonymisés.
 - [x] Nettoyer le projet et le README.
 - [x] Vérifier le build et les routes locales.
-- [ ] Déployer.
+- [x] Déployer.
+
+## Dernière vérification
+
+- Build local `npm run build` : OK.
+- Audit sécurité `npm audit --audit-level=high` : OK, 0 vulnérabilité.
+- Routes locales vérifiées avec le préfixe GitHub Pages :
+  - `http://127.0.0.1:4321/portfolio/`
+  - `http://127.0.0.1:4321/portfolio/brief`
+- Déploiement GitHub Pages : OK via le workflow `Deploy to GitHub Pages`.
+- Note : GitHub affiche un avertissement de dépréciation Node 20 sur une action interne liée à `actions/upload-pages-artifact@v4`. Le workflow utilise déjà Node 24 pour le build.
 
 ## Positionnement recommandé
 
