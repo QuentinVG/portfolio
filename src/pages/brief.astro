@@ -175,7 +175,19 @@ const asset = (path: string) =>
             <p id="complexity-text">Remplissez le formulaire pour obtenir une synthèse.</p>
             <p class="score-detail" id="score-detail">Score indicatif : 0/0</p>
             <div class="score-bar" aria-hidden="true"><span id="score-fill"></span></div>
+            <div class="recommendation-block">
+              <strong>Format conseillé</strong>
+              <p id="recommended-format">À déterminer</p>
+            </div>
             <div class="result-grid">
+              <article>
+                <h3>Périmètre V1 recommandé</h3>
+                <ul id="v1-list"></ul>
+              </article>
+              <article>
+                <h3>À sortir du périmètre</h3>
+                <ul id="out-list"></ul>
+              </article>
               <article>
                 <h3>Risques détectés</h3>
                 <ul id="risk-list"></ul>
@@ -209,6 +221,9 @@ const asset = (path: string) =>
       const text = document.querySelector("#complexity-text");
       const scoreDetail = document.querySelector("#score-detail");
       const scoreFill = document.querySelector("#score-fill");
+      const recommendedFormat = document.querySelector("#recommended-format");
+      const v1List = document.querySelector("#v1-list");
+      const outList = document.querySelector("#out-list");
       const riskList = document.querySelector("#risk-list");
       const questionList = document.querySelector("#question-list");
       const output = document.querySelector("#summary-output");
@@ -280,6 +295,9 @@ const asset = (path: string) =>
         text.textContent = `${result.level.text} ${result.level.recommendation}`;
         scoreDetail.textContent = `Score indicatif : ${result.score}/${result.maxScore}`;
         scoreFill.style.width = `${Math.min(100, Math.round((result.score / result.maxScore) * 100))}%`;
+        recommendedFormat.textContent = result.recommendedFormat;
+        renderList(v1List, result.v1Scope);
+        renderList(outList, result.outOfScope);
         renderList(riskList, result.risks);
         renderList(questionList, result.questions);
         output.value = result.summary;
@@ -583,6 +601,8 @@ const asset = (path: string) =>
 
   input[type="radio"],
   input[type="checkbox"] {
+    width: auto;
+    flex: 0 0 auto;
     accent-color: var(--accent);
   }
 
@@ -640,6 +660,22 @@ const asset = (path: string) =>
 
   .score-detail {
     margin: 12px 0 0;
+    color: var(--accent-dark);
+    font-weight: 850;
+  }
+
+  .recommendation-block {
+    display: grid;
+    gap: 6px;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: var(--soft-green);
+  }
+
+  .recommendation-block p {
+    margin: 0;
     color: var(--accent-dark);
     font-weight: 850;
   }

@@ -24,6 +24,12 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - [x] Rendre le scoring plus explicite avec score réel, score maximal et recommandations.
 - [x] Ajouter une étude de cas anonymisée plus structurée.
 - [x] Ajouter un aperçu produit de l'assistant sur la page d'accueil.
+- [x] Ajouter une page `/method` dédiée à la méthode de cadrage.
+- [x] Ajouter des livrables concrets : brief, V1/V2, mini backlog, estimation par lots.
+- [x] Ajouter des liens vers le code de l'assistant et de la logique de scoring.
+- [x] Améliorer la sortie de l'assistant : format conseillé, périmètre V1, hors périmètre.
+- [x] Vérifier visuellement les pages avec captures Playwright desktop/mobile.
+- [x] Corriger le rendu des radios/checkboxes de l'assistant détecté par capture.
 
 ## Dernière vérification
 
@@ -41,6 +47,8 @@ Le but n'est pas de faire un portfolio plus décoratif, mais un site plus juste,
 - Les erreurs possibles de presse-papiers et de `localStorage` sont gérées.
 - Le scoring n'est plus codé directement dans la page et expose une grille plus lisible.
 - La home apporte davantage de preuve produit via un aperçu de résultat et une étude de cas anonymisée.
+- La méthode est inspectable sur une page dédiée et le code est accessible depuis le portfolio.
+- Les captures locales ont été générées dans `tmp-screenshots/` et ce dossier est ignoré par Git.
 
 ## Positionnement recommandé
 

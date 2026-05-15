@@ -22,6 +22,9 @@ export type BriefResult = {
   score: number;
   maxScore: number;
   level: ComplexityLevel;
+  recommendedFormat: string;
+  v1Scope: string[];
+  outOfScope: string[];
   risks: string[];
   questions: string[];
   summary: string;
@@ -172,6 +175,59 @@ const buildQuestions = (data: BriefData) => {
   return questions;
 };
 
+const getRecommendedFormat = (data: BriefData, level: ComplexityLevel) => {
+  if (level.key === "high") return "Cadrage séparé avant développement";
+  if (data.projectType === "Site clair") return "Site clair avec périmètre court";
+  if (data.projectType === "Refonte") return "Audit léger puis refonte par priorités";
+  if (data.projectType === "Automatisation") return "Automatisation ciblée avec cas métier validé";
+  return "Petit outil web livré par version";
+};
+
+const buildV1Scope = (data: BriefData) => {
+  const scope = [
+    "Objectif principal écrit en une phrase",
+    "Parcours utilisateur minimal",
+    "Livraison d'une version utilisable sans fonctionnalités secondaires",
+  ];
+
+  if (data.projectType === "Site clair") {
+    scope.push("Pages essentielles seulement : accueil, offre, contact");
+  }
+  if (data.features.includes("Espace admin")) {
+    scope.push("Administration limitée aux actions réellement nécessaires");
+  }
+  if (data.features.includes("Import / export")) {
+    scope.push("Import ou export simple avec erreurs compréhensibles");
+  }
+  if (data.features.includes("Droits utilisateurs")) {
+    scope.push("Rôles strictement limités à la V1");
+  }
+
+  return scope;
+};
+
+const buildOutOfScope = (data: BriefData) => {
+  const out = [
+    "Fonctionnalités non indispensables au premier usage",
+    "Maintenance permanente ou support urgent",
+  ];
+
+  if (data.features.includes("Paiement")) {
+    out.push("Paiement en ligne sans cadrage sécurité dédié");
+  }
+  if (data.features.includes("Connexion à un outil existant")) {
+    out.push("Intégration complète tant que l'accès aux données n'est pas validé");
+  }
+  if (data.clarity !== "Assez clair") {
+    out.push("Développement complet avant clarification du besoin");
+  }
+  if (data.deadline === "Urgent") {
+    out.push("Fonctionnalités confort incompatibles avec l'urgence");
+  }
+
+  return out;
+};
+
 const buildSummary = (data: BriefData, result: Omit<BriefResult, "summary">) => `Bonjour Quentin,
 
 Je vous contacte pour préparer un projet web.
@@ -192,6 +248,13 @@ ${result.level.title}
 Score indicatif : ${result.score}/${result.maxScore}
 ${result.level.text}
 ${result.level.recommendation}
+Format conseillé : ${result.recommendedFormat}
+
+Périmètre V1 recommandé :
+${result.v1Scope.map((item) => `- ${item}`).join("\n")}
+
+À sortir du périmètre :
+${result.outOfScope.map((item) => `- ${item}`).join("\n")}
 
 Risques détectés :
 ${result.risks.map((risk) => `- ${risk}`).join("\n")}
@@ -204,9 +267,12 @@ Merci,`;
 export const evaluateBrief = (data: BriefData): BriefResult => {
   const score = scoreBrief(data);
   const level = getLevel(score);
+  const recommendedFormat = getRecommendedFormat(data, level);
+  const v1Scope = buildV1Scope(data);
+  const outOfScope = buildOutOfScope(data);
   const risks = buildRisks(data, score);
   const questions = buildQuestions(data);
-  const result = { score, maxScore, level, risks, questions };
+  const result = { score, maxScore, level, recommendedFormat, v1Scope, outOfScope, risks, questions };
 
   return {
     ...result,

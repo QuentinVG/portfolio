@@ -15,6 +15,7 @@ Le site sert à montrer une approche pragmatique :
 
 - `/` : page de présentation, positionnement, cadre de collaboration, exemples anonymisés.
 - `/brief` : assistant de cadrage front-only pour préparer un brief projet.
+- `/method` : méthode de cadrage détaillée, livrables et principes d'intervention.
 
 ## Stack
 

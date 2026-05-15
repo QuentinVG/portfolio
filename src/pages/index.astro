@@ -2,10 +2,14 @@
 const contactEmail = "vialgouteyron@gmail.com";
 const githubUrl = "https://github.com/QuentinVG";
 const linkedinUrl = "https://www.linkedin.com/in/qvg/";
+const repoUrl = "https://github.com/QuentinVG/portfolio";
+const briefSourceUrl = `${repoUrl}/blob/main/src/pages/brief.astro`;
+const scoringSourceUrl = `${repoUrl}/blob/main/src/lib/briefScoring.ts`;
 const asset = (path: string) =>
   `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
 
 const briefHref = asset("brief");
+const methodHref = asset("method");
 const mailSubject = "Demande de cadrage pour un projet web";
 const mailBody = `Bonjour Quentin,
 
@@ -59,6 +63,32 @@ const badFit = [
   "Projet sans périmètre, sans référent ou sans objectif clair.",
   "Budget très bas avec attentes élevées.",
   "Maintenance ouverte sans cadre.",
+];
+
+const operatingFrame = [
+  "Interventions courtes, cadrées et compatibles avec une disponibilité soir/week-end.",
+  "Pas d'urgence permanente : les délais doivent rester réalistes.",
+  "Retours regroupés pour éviter les micro-allers-retours.",
+  "Une V1 utile vaut mieux qu'un grand projet flou.",
+];
+
+const deliverableExamples = [
+  {
+    title: "Brief de cadrage",
+    text: "Objectif, utilisateurs, données, contraintes, risques et questions à trancher avant développement.",
+  },
+  {
+    title: "Découpage V1 / V2",
+    text: "Ce qui doit être livré tout de suite, ce qui peut attendre et ce qui doit rester hors périmètre.",
+  },
+  {
+    title: "Mini backlog",
+    text: "Liste courte de tâches compréhensibles, priorisées et assez précises pour estimer.",
+  },
+  {
+    title: "Estimation par lots",
+    text: "Une lecture plus saine qu'un gros prix global sur un besoin encore mouvant.",
+  },
 ];
 
 const examples = [
@@ -125,6 +155,7 @@ const caseStudy = {
       </a>
       <nav aria-label="Navigation principale">
         <a href="#approche">Approche</a>
+        <a href={methodHref}>Méthode</a>
         <a href="#cadre">Cadre</a>
         <a href="#exemples">Exemples</a>
         <a class="nav-cta" href={briefHref}>Préparer un brief</a>
@@ -145,8 +176,8 @@ const caseStudy = {
             <a class="button secondary" href={mailHref}>Me contacter</a>
           </div>
           <p class="small-note">
-            Je privilégie les projets courts, raisonnables et bien cadrés. L'objectif est de livrer quelque chose d'utile,
-            maintenable et adapté à votre contexte, pas de construire une usine à gaz.
+            Je prends peu de projets, mais je les cadre sérieusement. L'objectif est de livrer quelque chose d'utile,
+            maintenable et adapté à votre contexte.
           </p>
         </div>
 
@@ -213,7 +244,10 @@ const caseStudy = {
               <li>Données existantes à valider</li>
             </ul>
           </div>
-          <a class="button primary" href={briefHref}>Lancer l'assistant</a>
+          <div class="button-row">
+            <a class="button primary" href={briefHref}>Lancer l'assistant</a>
+            <a class="button secondary" href={briefSourceUrl} rel="noreferrer" target="_blank">Voir le code</a>
+          </div>
         </div>
       </section>
 
@@ -249,10 +283,32 @@ const caseStudy = {
         </div>
       </section>
 
+      <section class="section-pad frame-section">
+        <div class="section-heading">
+          <p class="eyebrow">Cadre d'intervention</p>
+          <h2>Une disponibilité assumée, donc des projets mieux filtrés.</h2>
+          <p>
+            Je ne cherche pas à prendre tout ce qui passe. Le bon format est un projet utile, limité, avec des décisions
+            claires et un rythme compatible avec une activité complémentaire.
+          </p>
+        </div>
+        <div class="card-grid four">
+          {operatingFrame.map((item) => (
+            <article class="card compact-card">
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section class="section-pad process-section">
         <div class="section-heading">
           <p class="eyebrow">Méthode</p>
           <h2>Un déroulé court pour limiter la charge mentale.</h2>
+          <p>
+            La méthode complète est volontairement simple : clarifier, découper, livrer une V1, puis décider si la suite
+            mérite vraiment d'être construite.
+          </p>
         </div>
         <div class="card-grid four">
           {process.map(([number, title, text]) => (
@@ -260,6 +316,28 @@ const caseStudy = {
               <span>{number}</span>
               <h3>{title}</h3>
               <p>{text}</p>
+            </article>
+          ))}
+        </div>
+        <div class="method-link">
+          <a class="button secondary" href={methodHref}>Voir la méthode détaillée</a>
+        </div>
+      </section>
+
+      <section class="section-pad deliverables-section">
+        <div class="section-heading">
+          <p class="eyebrow">Livrables concrets</p>
+          <h2>Des sorties utiles avant même de coder.</h2>
+          <p>
+            Un bon petit projet commence souvent par une meilleure formulation du besoin. Ces livrables évitent les devis
+            flous et les développements qui changent de forme en route.
+          </p>
+        </div>
+        <div class="card-grid four">
+          {deliverableExamples.map((item) => (
+            <article class="card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </article>
           ))}
         </div>
@@ -318,6 +396,7 @@ const caseStudy = {
         </div>
         <div class="contact-actions">
           <a class="button primary" href={briefHref}>Préparer un brief</a>
+          <a class="button ghost" href={scoringSourceUrl} rel="noreferrer" target="_blank">Voir la logique de scoring</a>
           <a class="button ghost" href={mailHref}>Envoyer un email</a>
           <div class="social-links" aria-label="Liens secondaires">
             <a href={linkedinUrl} rel="noreferrer" target="_blank">LinkedIn</a>
@@ -578,7 +657,8 @@ const caseStudy = {
   }
 
   .intro-section,
-  .process-section {
+  .process-section,
+  .deliverables-section {
     background: var(--surface);
   }
 
@@ -640,6 +720,12 @@ const caseStudy = {
 
   .app-card .button {
     width: 100%;
+  }
+
+  .button-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
     margin-top: 18px;
   }
 
@@ -734,6 +820,15 @@ const caseStudy = {
     background: var(--soft-warm);
   }
 
+  .frame-section {
+    background: var(--surface);
+  }
+
+  .compact-card p {
+    margin: 0;
+    font-weight: 850;
+  }
+
   ul {
     display: grid;
     gap: 10px;
@@ -763,6 +858,10 @@ const caseStudy = {
     font-size: 2.6rem;
     font-weight: 950;
     line-height: 1;
+  }
+
+  .method-link {
+    margin-top: 18px;
   }
 
   .examples-section {
@@ -899,6 +998,7 @@ const caseStudy = {
     .card-grid.three,
     .card-grid.four,
     .card-grid.two,
+    .button-row,
     .case-grid,
     .strength-list,
     .metric-grid {
