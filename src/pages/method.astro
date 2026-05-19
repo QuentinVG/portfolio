@@ -9,6 +9,11 @@ const navItems = [
   { href: asset(""), label: "Portfolio" },
   { href: briefHref, label: "Préparer un brief", cta: true },
 ];
+const pageTitle = "Méthode de cadrage - Quentin Vial-Gouteyron";
+const pageDescription =
+  "Méthode de cadrage de Quentin Vial-Gouteyron pour projets web métier, outils internes et automatisations simples.";
+const canonicalUrl = "https://quentinvg.github.io/portfolio/method";
+const ogImageUrl = "https://quentinvg.github.io/portfolio/og.svg";
 const steps = [
   {
     title: "Comprendre le besoin réel",
@@ -59,11 +64,19 @@ const checks = [
     <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
     <link rel="icon" href={asset("favicon.ico")} />
     <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="Méthode de cadrage de Quentin Vial-Gouteyron pour projets web métier, outils internes et automatisations simples."
-    />
-    <title>Méthode - Quentin Vial-Gouteyron</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <title>{pageTitle}</title>
   </head>
   <body>
     <SiteHeader subtitle="Méthode de cadrage" navItems={navItems} />
