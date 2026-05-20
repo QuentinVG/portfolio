@@ -15,11 +15,14 @@ const briefSourceUrl = `${repoUrl}/blob/main/src/pages/brief.astro`;
 const scoringSourceUrl = `${repoUrl}/blob/main/src/lib/briefScoring.ts`;
 const immoradarPageUrl = "https://quentinvg.github.io/immoradar/";
 const immoradarRepoUrl = "https://github.com/QuentinVG/immoradar";
+const decisionclairePageUrl = "https://quentinvg.github.io/decisionclaire/";
+const decisionclaireRepoUrl = "https://github.com/QuentinVG/decisionclaire";
 
 const navItems = [
   { href: "#approche", label: "Approche" },
   { href: methodHref, label: "Méthode" },
   { href: "#preuves", label: "Preuves" },
+  { href: "#projets", label: "Projets" },
   { href: "#exemples", label: "Exemples" },
   { href: briefHref, label: "Préparer un brief", cta: true },
 ];
@@ -315,7 +318,7 @@ v1:
         </div>
       </section>
 
-      <section class="section-pad project-section">
+      <section id="projets" class="section-pad project-section">
         <div class="section-heading">
           <p class="eyebrow">Projet complet</p>
           <h2>ImmoRadar : une app Laravel finie, pas juste une maquette.</h2>
@@ -354,6 +357,50 @@ v1:
             <div class="risk-line">
               <span>Alertes</span>
               <strong>DPE, budget, trajet, infos manquantes</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section-pad project-section decisionclaire-section">
+        <div class="section-heading">
+          <p class="eyebrow">Projet personnel</p>
+          <h2>DécisionClaire : des calculateurs Laravel pour décider plus calmement.</h2>
+          <p>
+            Application fullstack d'outils gratuits pour clarifier des décisions d'argent du quotidien : achat
+            raisonnable, reste à vivre, objectif épargne, abonnements et comparaison de scénarios.
+          </p>
+        </div>
+        <div class="project-showcase">
+          <article class="project-panel">
+            <span class="status">Laravel 13 / Breeze / DomPDF</span>
+            <h3>Un assistant de décision sans compte bancaire connecté.</h3>
+            <p>
+              Les outils sont utilisables sans compte. L'utilisateur peut sauvegarder ses simulations s'il se connecte,
+              exporter un PDF, copier un résumé et comprendre le verdict sans jargon financier.
+            </p>
+            <div class="project-metrics" aria-label="Fonctionnalités DécisionClaire">
+              <div><strong>6</strong><span>outils publics</span></div>
+              <div><strong>PDF</strong><span>exports privés</span></div>
+              <div><strong>CI</strong><span>tests, Pint, Larastan</span></div>
+            </div>
+            <div class="button-row">
+              <a class="button primary" href={decisionclairePageUrl} rel="noreferrer" target="_blank">Voir la vitrine</a>
+              <a class="button secondary" href={decisionclaireRepoUrl} rel="noreferrer" target="_blank">Voir le repo</a>
+            </div>
+          </article>
+          <aside class="decision-preview decisionclaire-preview" aria-label="Aperçu DécisionClaire">
+            <div>
+              <span>J'achète ou pas ?</span>
+              <strong>Achat raisonnable, limite, impulsif probable ou risqué</strong>
+            </div>
+            <div>
+              <span>Reste à vivre</span>
+              <strong>Mensuel, hebdomadaire, journalier et marge de sécurité</strong>
+            </div>
+            <div class="risk-line">
+              <span>Compte optionnel</span>
+              <strong>Sauvegarde, duplication, suppression et export PDF</strong>
             </div>
           </aside>
         </div>
