@@ -167,18 +167,18 @@ const structuredData = {
       <section class="hero section-pad">
         <div class="hero-copy">
           <p class="eyebrow">Valence, Drôme, Ardèche et distance</p>
-          <h1>Je construis des petits outils web qui enlèvent du flou dans le travail quotidien.</h1>
+          <h1>Je transforme des idées floues en outils web propres, rapides et utilisables.</h1>
           <p class="lead">
-            Je suis Quentin, développeur PHP depuis environ 9 ans. J'aide surtout quand un besoin métier est trop
-            important pour rester dans Excel, mais pas assez clair pour lancer un gros projet.
+            Je suis Quentin, développeur PHP depuis environ 9 ans. J’aide quand un besoin métier devient trop important
+            pour rester dans Excel, mais mérite encore une V1 simple plutôt qu’un gros projet mal cadré.
           </p>
           <div class="hero-actions">
             <a class="button primary" href={briefHref}>Préparer mon brief</a>
             <a class="button secondary" href={mailHref}>Me contacter</a>
           </div>
           <p class="small-note">
-            Je préfère dire non à un mauvais périmètre que vendre une promesse fragile. Le bon projet est souvent plus
-            petit que l'idée de départ.
+            Je préfère réduire un périmètre que vendre une promesse fragile. Un bon outil commence souvent plus petit
+            que l’idée de départ, puis devient fiable.
           </p>
         </div>
 
@@ -321,10 +321,10 @@ v1:
       <section id="projets" class="section-pad project-section">
         <div class="section-heading">
           <p class="eyebrow">Projet complet</p>
-          <h2>ImmoRadar : une app Laravel finie, pas juste une maquette.</h2>
+          <h2>ImmoRadar : l’app Laravel qui montre le mieux mon niveau produit.</h2>
           <p>
             Assistant de visite et de décision immobilière anti-coup de cœur : projets, biens, checklist mobile, coût
-            réel mensuel, alertes, scoring expliqué, comparateur et rapports PDF.
+            réel mensuel, alertes, scoring expliqué, comparateur, documents avant offre et rapports PDF.
           </p>
         </div>
         <div class="project-showcase">
@@ -525,20 +525,20 @@ v1:
 <style>
   :root {
     color-scheme: light;
-    --bg: #f8f8f5;
-    --bg-soft: #eef3f1;
+    --bg: #fbfaf5;
+    --bg-soft: #eef8f5;
     --surface: #ffffff;
-    --ink: #202124;
-    --muted: #62645f;
-    --line: #d7ded8;
-    --accent: #2f7368;
-    --accent-dark: #143f38;
-    --cool: #405f73;
-    --warm: #b46a36;
+    --ink: #101827;
+    --muted: #596575;
+    --line: #d8e4df;
+    --accent: #0f766e;
+    --accent-dark: #134e4a;
+    --cool: #2563eb;
+    --warm: #c56a2d;
     --soft-green: #e9f4ef;
     --soft-warm: #fff1e6;
-    --shadow: 0 20px 54px rgba(32, 33, 36, 0.1);
-    --shadow-strong: 0 28px 80px rgba(20, 63, 56, 0.16);
+    --shadow: 0 22px 60px rgba(15, 23, 42, 0.10);
+    --shadow-strong: 0 32px 90px rgba(15, 118, 110, 0.18);
     --radius: 8px;
     --page: 1160px;
   }
@@ -554,7 +554,10 @@ v1:
   body {
     margin: 0;
     color: var(--ink);
-    background: var(--bg);
+    background:
+      linear-gradient(135deg, rgba(15, 118, 110, 0.10), transparent 30%),
+      linear-gradient(225deg, rgba(197, 106, 45, 0.12), transparent 28%),
+      var(--bg);
     font-family:
       Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
@@ -590,8 +593,8 @@ v1:
 
   h1 {
     max-width: 940px;
-    font-size: clamp(2.35rem, 4.9vw, 4.9rem);
-    line-height: 1;
+    font-size: clamp(2.35rem, 4.25vw, 4.35rem);
+    line-height: 1.02;
   }
 
   h2 {
@@ -614,6 +617,21 @@ v1:
     grid-template-columns: minmax(0, 1fr) minmax(360px, 0.72fr);
     gap: clamp(32px, 6vw, 78px);
     align-items: center;
+    position: relative;
+  }
+
+  .hero::before {
+    position: absolute;
+    inset: 32px max(clamp(20px, 5vw, 72px), calc((100vw - var(--page)) / 2));
+    z-index: -1;
+    border: 1px solid rgba(15, 118, 110, 0.10);
+    border-radius: var(--radius);
+    background-image:
+      linear-gradient(rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px);
+    background-size: 36px 36px;
+    content: "";
+    mask-image: linear-gradient(90deg, black, transparent 86%);
   }
 
   .eyebrow {
@@ -688,8 +706,9 @@ v1:
 
   .button.primary {
     border-color: var(--accent);
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent), #10b981);
     color: #fff;
+    box-shadow: 0 16px 34px rgba(15, 118, 110, 0.18);
   }
 
   .button.primary:hover {
@@ -719,6 +738,7 @@ v1:
     position: relative;
     overflow: hidden;
     padding: clamp(22px, 4vw, 32px);
+    border-color: rgba(15, 118, 110, 0.26);
     box-shadow: var(--shadow-strong);
   }
 
@@ -726,8 +746,8 @@ v1:
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(135deg, rgba(47, 115, 104, 0.16), transparent 38%),
-      radial-gradient(circle at 92% 8%, rgba(180, 106, 54, 0.13), transparent 28%);
+      linear-gradient(135deg, rgba(15, 118, 110, 0.18), transparent 38%),
+      linear-gradient(225deg, rgba(197, 106, 45, 0.16), transparent 34%);
     content: "";
     pointer-events: none;
   }
@@ -883,7 +903,7 @@ v1:
   .step-card:hover,
   .example-card:hover {
     border-color: rgba(47, 115, 104, 0.38);
-    box-shadow: 0 14px 34px rgba(32, 33, 36, 0.08);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.10);
     transform: translateY(-2px);
   }
 
@@ -1016,7 +1036,9 @@ v1:
   }
 
   .project-section {
-    background: var(--bg-soft);
+    background:
+      linear-gradient(135deg, rgba(15, 118, 110, 0.10), transparent 40%),
+      var(--bg-soft);
   }
 
   .project-showcase {
@@ -1077,7 +1099,9 @@ v1:
     display: grid;
     gap: 12px;
     padding: 24px;
-    background: #1f2428;
+    background:
+      linear-gradient(135deg, rgba(16, 185, 129, 0.18), transparent 42%),
+      #101827;
   }
 
   .decision-preview div {
@@ -1200,7 +1224,8 @@ v1:
     padding: clamp(32px, 6vw, 64px);
     border-radius: var(--radius);
     background:
-      linear-gradient(135deg, rgba(47, 115, 104, 0.38), rgba(32, 33, 36, 0) 44%),
+      linear-gradient(135deg, rgba(16, 185, 129, 0.32), rgba(32, 33, 36, 0) 44%),
+      linear-gradient(225deg, rgba(197, 106, 45, 0.20), transparent 38%),
       var(--ink);
     color: #fff;
   }
